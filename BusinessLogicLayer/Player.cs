@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    namespace Chess_Consortium
-    {
-        class Player
+   
+        public class Player
         {
             //Attributes.   
             string playerName;
@@ -53,4 +47,4 @@ namespace BusinessLogicLayer
     }//End Class. 
 }//End Namespace. 
 
-}
+

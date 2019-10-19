@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer
 {
-    class Manager
+    public class Manager
     {
         //Attributes. 
         ArrayList onGoingGames = new ArrayList(9);
@@ -21,45 +21,45 @@ namespace BusinessLogicLayer
         {
             FileHandler dataHandler = new FileHandler();
             registeredPlayers = dataHandler.RegisteredPlayers;
-        }
-        playerStatistics = dataHandler.PlayerStatistics; 
-            
+            playerStatistics = dataHandler.PlayerStatistics;
+        }    
       
     //---------------------------------------------------------------------------------------------- 
 
     //Methods for managing players. 
-    public void registerNewPlayer()
+    public bool registerNewPlayer(Player newPlayer)
         {
 
-            InputOutputHandler playerInfoHandler = new InputOutputHandler();
-            Player newPlayer = playerInfoHandler.inputPlayerInfo();
+
+            bool alreadyRegistered = true;
             if (!playerRegistered(newPlayer.CNIC))
             {
                 registeredPlayers.Add(newPlayer);
-                playerInfoHandler.printPlayerInfo(newPlayer);
+               
                 PlayerStats newPlayerStats = new PlayerStats(newPlayer.CNIC);
                 playerStatistics.Add(newPlayerStats);
-                playerInfoHandler.playerAddedConfirmation();
+                alreadyRegistered = false;
 
             }
             else
             {
-                playerInfoHandler.playerAlreadyRegistered();
+                alreadyRegistered = true;
             }
+            return alreadyRegistered;
 
         }
 
         public bool playerRegistered(string playerCnic)
         {
             bool isRegistered = false;
-            InputOutputHandler playerInfoHandler = new InputOutputHandler();
+          
             Player temp = null;
             for (int index = 0; index < registeredPlayers.Count; index++)
             {
                 temp = registeredPlayers[index] as Player;
                 if (playerCnic == temp.CNIC)
                 {
-                    playerInfoHandler.printPlayerInfo(temp);
+                    
                     isRegistered = true;
                     break;
                 }
@@ -69,7 +69,7 @@ namespace BusinessLogicLayer
 
         public PlayerStats fetchStats(string playerCnic)
         {
-            InputOutputHandler errorHandler = new InputOutputHandler();
+          
             PlayerStats locatedStats = null;
             bool statsExist = false;
             int locatedIndex = 0;
@@ -89,7 +89,7 @@ namespace BusinessLogicLayer
             }
             else
             {
-                errorHandler.statsNotFound();
+              
             }
 
             return locatedStats;
@@ -98,7 +98,7 @@ namespace BusinessLogicLayer
         public void searchPlayer(string playerCnic)
         {
             bool isFound = false;
-            InputOutputHandler playerInfoHandler = new InputOutputHandler();
+            
             Player locatedPlayer = null;
             for (int index = 0; index < registeredPlayers.Count; index++)
             {
@@ -112,34 +112,34 @@ namespace BusinessLogicLayer
             if (isFound)
             {
                 PlayerStats locatedStats = fetchStats(locatedPlayer.CNIC);
-                playerInfoHandler.getPlayerDetails(locatedPlayer, locatedStats);
+                
             }
             else
             {
-                playerInfoHandler.playerNotFound();
+               
             }
         }
 
         public void viewAllRegisteredPlayer()
         {
-            InputOutputHandler outputHandler = new InputOutputHandler();
+           
             for (int index = 0; index < registeredPlayers.Count; index++)
             {
                 Player temp = registeredPlayers[index] as Player;
-                outputHandler.printPlayerInfo(temp);
+               
             }
         }
         //---------------------------------------------------------------------------------------------- 
 
         //Manager Controls for The Program. 
-        public void assignOutcome(string TableId)
+        public void assignOutcome(string TableId,byte choice)
         {
             for (int index = 0; index < onGoingGames.Count; index++)
             {
                 if (TableId == (onGoingGames[index] as Game).TableID)
                 {
-                    InputOutputHandler inputHandler = new InputOutputHandler();
-                    byte choice = inputHandler.selectOutCome();
+                 
+                   
                     Game temp = onGoingGames[index] as Game;
                     temp.Outcome = choice;
                     if (choice == 1)
@@ -194,10 +194,11 @@ namespace BusinessLogicLayer
 
 
         //Methods for Managing Tables. 
-        public void assignGame()
+        public bool assignGame(Game assignedgame )
         {
-            InputOutputHandler gameDataHandler = new InputOutputHandler();
-            Game newGame = gameDataHandler.inputGameData();
+
+            Game newGame = assignedgame;
+            bool gameAssigned = false;
             if (!isAlreadyPlaying(newGame.PlayerOneCnic) && !isAlreadyPlaying(newGame.PlayerTwoCnic))
             {
                 if (isRegistered(newGame.PlayerOneCnic) && newGame.PlayerTwoCnic == null)
@@ -205,6 +206,7 @@ namespace BusinessLogicLayer
                     if (isPending())
                     {
                         Game temp = null;
+                        Game temp2 = null;
                         for (int index = 0; index < onGoingGames.Count; index++)
                         {
                             if ((onGoingGames[index] as Game).PlayerTwoCnic == null)
@@ -212,8 +214,9 @@ namespace BusinessLogicLayer
                                 temp = onGoingGames[index] as Game;
                                 temp.PlayerTwoCnic = newGame.PlayerOneCnic;
                                 temp.DateTimeOfGame = DateTime.Now;
-                                Console.WriteLine($"Table : {temp.TableID} has been assigned!");
-
+                                temp2 = newGame;
+                                temp2.TableID = temp.TableID;
+                                gameAssigned = true;
                                 break;
                             }
                         }
@@ -224,11 +227,11 @@ namespace BusinessLogicLayer
                         {
                             newGame.setTableID();
                             onGoingGames.Add(newGame);
-                            Console.WriteLine($"Table : {newGame.TableID} has been assigned!");
+                            gameAssigned = true;
                         }
                         else
                         {
-                            gameDataHandler.noTableAvailable();
+                            gameAssigned = false ;
                         }
                     }
                 }
@@ -244,8 +247,8 @@ namespace BusinessLogicLayer
                                 temp = onGoingGames[index] as Game;
                                 temp.PlayerOneCnic = newGame.PlayerOneCnic;
                                 temp.PlayerTwoCnic = newGame.PlayerTwoCnic;
-                                temp.DateTimeOfGame = DateTime.Now; Console.WriteLine($"Table : {temp.TableID} has been assigned!");
-
+                                temp.DateTimeOfGame = DateTime.Now;
+                                gameAssigned = true;
                                 break;
                             }
                         }
@@ -256,7 +259,7 @@ namespace BusinessLogicLayer
                         {
                             newGame.setTableID();
                             onGoingGames.Add(newGame);
-                            Console.WriteLine($"Table : {newGame.TableID} has been assigned!");
+                            gameAssigned = true;
 
                         }
                     }
@@ -264,27 +267,29 @@ namespace BusinessLogicLayer
             }
             else
             {
-                Console.WriteLine("Operation can not be performed!");
+                gameAssigned = false;
             }
+            return gameAssigned;
 
         }
 
         public bool isAlreadyPlaying(string playerCnic)
         {
-            bool check = false; InputOutputHandler errorHandler = new InputOutputHandler();
+            bool check = false;
+          
             for (int index = 0; index < onGoingGames.Count; index++)
             {
                 Game temp = onGoingGames[index] as Game;
                 if (playerCnic == temp.PlayerOneCnic && temp.PlayerOneCnic != null)
                 {
                     check = true;
-                    errorHandler.alreadyPlaying(temp.PlayerOneCnic);
+                    
                     break;
                 }
                 else if (playerCnic == temp.PlayerTwoCnic && temp.PlayerTwoCnic != null)
                 {
                     check = true;
-                    errorHandler.alreadyPlaying(temp.PlayerTwoCnic);
+                   
                     break;
                 }
             }
@@ -301,7 +306,7 @@ namespace BusinessLogicLayer
                 if ((onGoingGames[index] as Game).PlayerTwoCnic == null)
                 {
                     isPendingOpponent = true;
-
+                    break;
                 }
             }
             return isPendingOpponent;
@@ -332,22 +337,32 @@ namespace BusinessLogicLayer
         }
         public void showTableInfo()
         {
-            InputOutputHandler tableDataHandler = new InputOutputHandler();
+           
             for (int index = 0; index < onGoingGames.Count; index++)
             {
                 Game onGoingGame = onGoingGames[index] as Game;
-                tableDataHandler.getTableInfo(onGoingGame);
+                
             }
         }
 
         //---------------------------------------------------------------------------------------------- 
-
-        //Destructor. 
-        ~Manager()
+        //FileUpdater.
+        public void UpdatePlayers()
         {
             FileHandler updateHandler = new FileHandler();
             updateHandler.updatePlayersFile(registeredPlayers);
+        }
+        public void UpdateStats()
+        {
+            FileHandler updateHandler = new FileHandler();
             updateHandler.updateStatsFile(playerStatistics);
+        }
+        //Destructor. 
+        ~Manager()
+        {
+            //FileHandler updateHandler = new FileHandler();
+            //updateHandler.updatePlayersFile(registeredPlayers);
+            //updateHandler.updateStatsFile(playerStatistics);
 
         }
         //--------------------------------------------------------------------------------------------- 

@@ -1,0 +1,5 @@
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojAssemblyReference.cache
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb

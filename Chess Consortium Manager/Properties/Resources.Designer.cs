@@ -93,6 +93,16 @@ namespace Chess_Consortium_Manager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_user_add_216490 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_user-add_216490", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Magnifying_Glass_512 {
             get {
                 object obj = ResourceManager.GetObject("Magnifying-Glass-512", resourceCulture);

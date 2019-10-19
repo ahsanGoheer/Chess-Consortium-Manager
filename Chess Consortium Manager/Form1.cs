@@ -21,5 +21,17 @@ namespace Chess_Consortium_Manager
         {
             Application.Exit();
         }
+
+        private void registerPlayerBtn_Click(object sender, EventArgs e)
+        {
+            RegisterPlayer newForm = new RegisterPlayer();
+            newForm.Show();
+        }
+
+        private void assignTableBtn_Click(object sender, EventArgs e)
+        {
+            AssignTable newForm = new AssignTable();
+            newForm.Show();
+        }
     }
 }

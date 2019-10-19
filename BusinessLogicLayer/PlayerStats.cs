@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BusinessLogicLayer
 {
     
-        class PlayerStats
+        public class PlayerStats
         {
         //Attributes.       
         string cnic;

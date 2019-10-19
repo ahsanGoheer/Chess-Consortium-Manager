@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BusinessLogicLayer
 {
     
-        class Game
+        public class Game
         {
             //Attributes.       
             string tableID;

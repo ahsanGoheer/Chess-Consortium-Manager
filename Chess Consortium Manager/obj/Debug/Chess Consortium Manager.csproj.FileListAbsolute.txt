@@ -8,3 +8,17 @@ C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\ob
 C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.csproj.CoreCompileInputs.cache
 C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.exe
 C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.pdb
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\bin\Debug\Chess Consortium Manager.exe.config
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\bin\Debug\Chess Consortium Manager.exe
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\bin\Debug\Chess Consortium Manager.pdb
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.csprojAssemblyReference.cache
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.mainForm.resources
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.Properties.Resources.resources
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.csproj.GenerateResource.cache
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.exe
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.pdb
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\bin\Debug\BusinessLogicLayer.dll
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\bin\Debug\BusinessLogicLayer.pdb
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.RegisterPlayer.resources
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.csproj.CopyComplete
+C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.AssignTable.resources
