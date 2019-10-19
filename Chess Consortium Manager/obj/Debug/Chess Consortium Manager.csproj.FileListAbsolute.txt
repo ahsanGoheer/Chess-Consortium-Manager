@@ -1,0 +1,10 @@
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\bin\Debug\Chess Consortium Manager.exe.config
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\bin\Debug\Chess Consortium Manager.exe
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\bin\Debug\Chess Consortium Manager.pdb
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.csprojAssemblyReference.cache
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.mainForm.resources
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.Properties.Resources.resources
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.csproj.GenerateResource.cache
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.csproj.CoreCompileInputs.cache
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.exe
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.pdb
