@@ -22,3 +22,12 @@ C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium
 C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.RegisterPlayer.resources
 C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.csproj.CopyComplete
 C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.AssignTable.resources
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\bin\Debug\BusinessLogicLayer.dll
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\bin\Debug\BusinessLogicLayer.pdb
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.AssignTable.resources
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.RegisterPlayer.resources
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess Consortium Manager.csproj.CopyComplete
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.ShowAllTables.resources
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.AssignOutcome.resources
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.ViewAllPlayers.resources
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.SearchAPlayer.resources

@@ -63,20 +63,16 @@ namespace BusinessLogicLayer
             totalGamesDrawn += 1;
             totalGamesPlayed = totalGamesWon + totalGamesLost + totalGamesDrawn;
         }
-        public void printStats()
+        public string printStats()
         {
             string statsData = $"Total Games Played         : {this.TotalGamesPlayed} \n"; 
             statsData += $"Total Games Won            : {this.TotalGamesWon} \n";
             statsData += $"Total Games Lost           : {this.TotalGamesLost} \n";
             statsData += $"Total Games Drawn          : {this.TotalGamesDrawn} \n";
-            Console.Write(statsData);
+            return statsData;
 
         } 
     //-------------------------------------------------------------------------------
 
     }//End Class. 
-
- 
-
-    
 }//End Namespace.

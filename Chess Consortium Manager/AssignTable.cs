@@ -12,7 +12,7 @@ namespace Chess_Consortium_Manager
 {
     public partial class AssignTable : Form
     {
-        Manager gameManger = new Manager();
+        Manager gameManger = Manager.Instance;
         public AssignTable()
         {
             InitializeComponent();
@@ -105,6 +105,11 @@ namespace Chess_Consortium_Manager
         private void AssignTable_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Dispose();
+        }
+
+        private void AssignTable_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -3,3 +3,9 @@ C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\BusinessLogicLay
 C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojAssemblyReference.cache
 C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
 C:\Users\Ahsan Goheer\Documents\GitHub\Chess-Consortium-Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
+C:\Users\ahsan\source\repos\Chess Consortium Manager\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+C:\Users\ahsan\source\repos\Chess Consortium Manager\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+C:\Users\ahsan\source\repos\Chess Consortium Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojAssemblyReference.cache
+C:\Users\ahsan\source\repos\Chess Consortium Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\ahsan\source\repos\Chess Consortium Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+C:\Users\ahsan\source\repos\Chess Consortium Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb

@@ -34,12 +34,12 @@ namespace BusinessLogicLayer
             //-------------------------------------------------------------------------------
 
             //Methods.      
-            public void getPlayerInfo() 
+            public string getPlayerInfo() 
             { 
                 string playerData = "";
                 playerData += $"Player Name : {this.PlayerName} \n";
-                playerData += $"CNIC        : {this.CNIC} "; 
-                Console.WriteLine(playerData); 
+                playerData += $"CNIC        : {this.CNIC} \n";
+                return playerData;
             } 
         //-------------------------------------------------------------------------------
 

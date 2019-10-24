@@ -33,5 +33,29 @@ namespace Chess_Consortium_Manager
             AssignTable newForm = new AssignTable();
             newForm.Show();
         }
+
+        private void ShowAllTablesBtn_Click(object sender, EventArgs e)
+        {
+            ShowAllTables newForm = new ShowAllTables();
+            newForm.Show();
+        }
+
+        private void AssignOutcomeBtn_Click(object sender, EventArgs e)
+        {
+            AssignOutcome newForm = new AssignOutcome();
+            newForm.Show();
+        }
+
+        private void ViewPlayersBtn_Click(object sender, EventArgs e)
+        {
+            ViewAllPlayers newForm = new ViewAllPlayers();
+            newForm.Show();
+        }
+
+        private void SearchAPlayerBtn_Click(object sender, EventArgs e)
+        {
+            SearchAPlayer newForm = new SearchAPlayer();
+            newForm.Show();
+        }
     }
 }

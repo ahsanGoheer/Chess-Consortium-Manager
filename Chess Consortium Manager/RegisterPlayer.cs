@@ -30,7 +30,7 @@ namespace Chess_Consortium_Manager
         private void registerBtn_Click(object sender, EventArgs e)
         {
             bool alreadyRegistered = false;
-            Manager consortiumManager = new Manager();
+            Manager consortiumManager = Manager.Instance;
             string playerName = playerNameTb.Text;
             string CNIC = playerCnicTb.Text;
             Player newPlayer = new Player(playerName, CNIC);

@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssignOutcome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssignOutcome.Designer.cs">
+      <DependentUpon>AssignOutcome.cs</DependentUpon>
+    </Compile>
     <Compile Include="AssignTable.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,27 @@
     <Compile Include="RegisterPlayer.Designer.cs">
       <DependentUpon>RegisterPlayer.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchAPlayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchAPlayer.Designer.cs">
+      <DependentUpon>SearchAPlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAllTables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowAllTables.Designer.cs">
+      <DependentUpon>ShowAllTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewAllPlayers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewAllPlayers.Designer.cs">
+      <DependentUpon>ViewAllPlayers.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AssignOutcome.resx">
+      <DependentUpon>AssignOutcome.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AssignTable.resx">
       <DependentUpon>AssignTable.cs</DependentUpon>
     </EmbeddedResource>
@@ -84,6 +111,15 @@
     </Compile>
     <EmbeddedResource Include="RegisterPlayer.resx">
       <DependentUpon>RegisterPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchAPlayer.resx">
+      <DependentUpon>SearchAPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowAllTables.resx">
+      <DependentUpon>ShowAllTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewAllPlayers.resx">
+      <DependentUpon>ViewAllPlayers.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -10,6 +10,9 @@ namespace BusinessLogicLayer
     public class Manager
     {
         //Attributes. 
+        private static readonly object padlock = new object();
+        private static Manager instance = null;
+
         ArrayList onGoingGames = new ArrayList(9);
         ArrayList registeredPlayers = new ArrayList();
         ArrayList playerStatistics = new ArrayList();
@@ -17,13 +20,27 @@ namespace BusinessLogicLayer
         //---------------------------------------------------------------------------------------------- 
 
         //Constructor. 
-        public Manager()
+        private Manager()
         {
             FileHandler dataHandler = new FileHandler();
             registeredPlayers = dataHandler.RegisteredPlayers;
             playerStatistics = dataHandler.PlayerStatistics;
         }    
       
+        public static Manager Instance
+        {
+            get
+            {
+                lock(padlock)
+                {
+                    if(instance==null)
+                    {
+                        instance = new Manager();
+                    }
+                    return instance;
+                }
+            }
+        }
     //---------------------------------------------------------------------------------------------- 
 
     //Methods for managing players. 
@@ -95,10 +112,10 @@ namespace BusinessLogicLayer
             return locatedStats;
         }
 
-        public void searchPlayer(string playerCnic)
+        public string searchPlayer(string playerCnic)
         {
             bool isFound = false;
-            
+            string Info = null;
             Player locatedPlayer = null;
             for (int index = 0; index < registeredPlayers.Count; index++)
             {
@@ -112,22 +129,35 @@ namespace BusinessLogicLayer
             if (isFound)
             {
                 PlayerStats locatedStats = fetchStats(locatedPlayer.CNIC);
-                
+                Info = locatedPlayer.getPlayerInfo();
+                Info += locatedStats.printStats();
             }
-            else
-            {
-               
-            }
+           
+            return Info;
         }
 
-        public void viewAllRegisteredPlayer()
+        public string viewAllRegisteredPlayer()
         {
+            string playerInformation = null;
            
             for (int index = 0; index < registeredPlayers.Count; index++)
             {
                 Player temp = registeredPlayers[index] as Player;
-               
+                playerInformation += temp.getPlayerInfo();
+                PlayerStats getStats = fetchStats(temp.CNIC);
+                playerInformation += getStats.printStats();
+                playerInformation += "****************************************\n";
             }
+            return playerInformation;
+        }
+        public List<string> tableIDs()
+        {
+            List<string> IDs = new List<string>();
+            foreach(Game temp in onGoingGames)
+            {
+                IDs.Add(temp.TableID);
+            }
+            return IDs;
         }
         //---------------------------------------------------------------------------------------------- 
 
@@ -335,14 +365,16 @@ namespace BusinessLogicLayer
             }
             return hasTable;
         }
-        public void showTableInfo()
+        public string showTableInfo()
         {
-           
+            string tablesInfo = "";
             for (int index = 0; index < onGoingGames.Count; index++)
             {
                 Game onGoingGame = onGoingGames[index] as Game;
-                
+                tablesInfo += onGoingGame.GetTableInfo();
+                tablesInfo += "*************************************\n";
             }
+            return tablesInfo;
         }
 
         //---------------------------------------------------------------------------------------------- 
@@ -360,9 +392,7 @@ namespace BusinessLogicLayer
         //Destructor. 
         ~Manager()
         {
-            //FileHandler updateHandler = new FileHandler();
-            //updateHandler.updatePlayersFile(registeredPlayers);
-            //updateHandler.updateStatsFile(playerStatistics);
+           
 
         }
         //--------------------------------------------------------------------------------------------- 
