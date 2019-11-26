@@ -28,15 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchAPlayer));
             this.searchGb = new System.Windows.Forms.GroupBox();
-            this.playerIDLbl = new System.Windows.Forms.Label();
-            this.playerIDTb = new System.Windows.Forms.TextBox();
             this.searchBtn = new System.Windows.Forms.Button();
+            this.playerIDTb = new System.Windows.Forms.TextBox();
+            this.playerIDLbl = new System.Windows.Forms.Label();
             this.resultGb = new System.Windows.Forms.GroupBox();
             this.resultRtb = new System.Windows.Forms.RichTextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.searchGb.SuspendLayout();
             this.resultGb.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             this.SuspendLayout();
             // 
             // searchGb
@@ -52,22 +57,6 @@
             this.searchGb.TabStop = false;
             this.searchGb.Text = "Search";
             // 
-            // playerIDLbl
-            // 
-            this.playerIDLbl.AutoSize = true;
-            this.playerIDLbl.Location = new System.Drawing.Point(33, 59);
-            this.playerIDLbl.Name = "playerIDLbl";
-            this.playerIDLbl.Size = new System.Drawing.Size(109, 20);
-            this.playerIDLbl.TabIndex = 1;
-            this.playerIDLbl.Text = "Enter Player ID:";
-            // 
-            // playerIDTb
-            // 
-            this.playerIDTb.Location = new System.Drawing.Point(164, 56);
-            this.playerIDTb.Name = "playerIDTb";
-            this.playerIDTb.Size = new System.Drawing.Size(167, 27);
-            this.playerIDTb.TabIndex = 2;
-            // 
             // searchBtn
             // 
             this.searchBtn.FlatAppearance.BorderSize = 2;
@@ -82,6 +71,22 @@
             this.searchBtn.Click += new System.EventHandler(this.SearchBtn_Click);
             this.searchBtn.MouseEnter += new System.EventHandler(this.SearchBtn_MouseEnter);
             this.searchBtn.MouseLeave += new System.EventHandler(this.SearchBtn_MouseLeave);
+            // 
+            // playerIDTb
+            // 
+            this.playerIDTb.Location = new System.Drawing.Point(164, 56);
+            this.playerIDTb.Name = "playerIDTb";
+            this.playerIDTb.Size = new System.Drawing.Size(167, 27);
+            this.playerIDTb.TabIndex = 2;
+            // 
+            // playerIDLbl
+            // 
+            this.playerIDLbl.AutoSize = true;
+            this.playerIDLbl.Location = new System.Drawing.Point(33, 59);
+            this.playerIDLbl.Name = "playerIDLbl";
+            this.playerIDLbl.Size = new System.Drawing.Size(109, 20);
+            this.playerIDLbl.TabIndex = 1;
+            this.playerIDLbl.Text = "Enter Player ID:";
             // 
             // resultGb
             // 
@@ -104,6 +109,17 @@
             this.resultRtb.TabIndex = 0;
             this.resultRtb.Text = "";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // errorProvider2
+            // 
+            this.errorProvider2.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider2.ContainerControl = this;
+            this.errorProvider2.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider2.Icon")));
+            // 
             // SearchAPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -120,6 +136,8 @@
             this.searchGb.ResumeLayout(false);
             this.searchGb.PerformLayout();
             this.resultGb.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -132,5 +150,7 @@
         private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.GroupBox resultGb;
         private System.Windows.Forms.RichTextBox resultRtb;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ErrorProvider errorProvider2;
     }
 }

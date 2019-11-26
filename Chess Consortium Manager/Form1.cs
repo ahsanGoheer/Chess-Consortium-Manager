@@ -26,36 +26,79 @@ namespace Chess_Consortium_Manager
         {
             RegisterPlayer newForm = new RegisterPlayer();
             newForm.Show();
+            this.Hide();
+            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
         }
 
         private void assignTableBtn_Click(object sender, EventArgs e)
         {
             AssignTable newForm = new AssignTable();
             newForm.Show();
+            this.Hide();
+            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
         }
 
         private void ShowAllTablesBtn_Click(object sender, EventArgs e)
         {
             ShowAllTables newForm = new ShowAllTables();
             newForm.Show();
+            this.Hide();
+            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
         }
 
         private void AssignOutcomeBtn_Click(object sender, EventArgs e)
         {
             AssignOutcome newForm = new AssignOutcome();
             newForm.Show();
+            this.Hide();
+            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
         }
 
         private void ViewPlayersBtn_Click(object sender, EventArgs e)
         {
             ViewAllPlayers newForm = new ViewAllPlayers();
             newForm.Show();
+            this.Hide();
+            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
         }
 
         private void SearchAPlayerBtn_Click(object sender, EventArgs e)
         {
             SearchAPlayer newForm = new SearchAPlayer();
             newForm.Show();
+            this.Hide();
+            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
+        }
+        private void showMe(object sender,EventArgs e)
+        {
+            this.Show();
+        }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SearchAPlayerLbl_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       
+
+        
+        private void ExitBtn_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void ExitBtn_MouseEnter(object sender, EventArgs e)
+        {
+            exitBtn.BackColor = Color.Firebrick;
+        }
+
+        private void ExitBtn_MouseLeave(object sender, EventArgs e)
+        {
+            exitBtn.BackColor = Color.WhiteSmoke;
         }
     }
 }

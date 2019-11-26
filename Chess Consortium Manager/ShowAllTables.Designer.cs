@@ -45,9 +45,11 @@
             this.tablesGb.TabIndex = 0;
             this.tablesGb.TabStop = false;
             this.tablesGb.Text = "Tables";
+            this.tablesGb.Enter += new System.EventHandler(this.TablesGb_Enter);
             // 
             // showTablesRtb
             // 
+            this.showTablesRtb.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.showTablesRtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.showTablesRtb.Location = new System.Drawing.Point(3, 26);
             this.showTablesRtb.Name = "showTablesRtb";

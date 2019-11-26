@@ -83,6 +83,16 @@ namespace Chess_Consortium_Manager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Capture {
+            get {
+                object obj = ResourceManager.GetObject("Capture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap download {
             get {
                 object obj = ResourceManager.GetObject("download", resourceCulture);
@@ -96,6 +106,16 @@ namespace Chess_Consortium_Manager.Properties {
         internal static System.Drawing.Bitmap iconfinder_user_add_216490 {
             get {
                 object obj = ResourceManager.GetObject("iconfinder_user-add_216490", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_close_window_80 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-close-window-80", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

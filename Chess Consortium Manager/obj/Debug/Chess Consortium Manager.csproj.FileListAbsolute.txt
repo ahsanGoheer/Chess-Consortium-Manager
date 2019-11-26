@@ -31,3 +31,5 @@ C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\ob
 C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.AssignOutcome.resources
 C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.ViewAllPlayers.resources
 C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.SearchAPlayer.resources
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\bin\Debug\DataLayer.dll
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\bin\Debug\DataLayer.pdb

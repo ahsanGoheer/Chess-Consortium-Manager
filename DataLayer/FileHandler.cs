@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-namespace BusinessLogicLayer
+
+namespace DataLayer
 {
     public class FileHandler
     {
@@ -57,8 +58,10 @@ namespace BusinessLogicLayer
             {
                 string playerName = playerFileReader.ReadLine();
                 string cnic = playerFileReader.ReadLine();
-                Player registeredPlayer = new Player(playerName, cnic);
-                playersInFile.Add(registeredPlayer);
+                string[] playerData = new string[2];
+                playerData[0] = playerName;
+                playerData[1] = cnic;
+                playersInFile.Add(playerData);
             }
             playerFileReader.Dispose();
             return playersInFile;
@@ -71,60 +74,78 @@ namespace BusinessLogicLayer
             while (!playerStatsReader.EndOfStream)
             {
                 string cnic = playerStatsReader.ReadLine();
-                int totalGamesPlayed = int.Parse(playerStatsReader.ReadLine());
-                int totalGamesWon = int.Parse(playerStatsReader.ReadLine());
-                int totalGamesLost = int.Parse(playerStatsReader.ReadLine());
-                int totalGamesDrawn = int.Parse(playerStatsReader.ReadLine());
-                PlayerStats storedRecord = new PlayerStats(cnic, totalGamesPlayed, totalGamesWon, totalGamesLost, totalGamesDrawn);
-                recordsInFile.Add(storedRecord);
+                string totalGamesPlayed = playerStatsReader.ReadLine();
+                string totalGamesWon = playerStatsReader.ReadLine();
+                string totalGamesLost = playerStatsReader.ReadLine();
+                string totalGamesDrawn = playerStatsReader.ReadLine();
+
+                string[] gameRecord = new string[5];
+                gameRecord[0] = cnic;
+                gameRecord[1] = totalGamesPlayed;
+                gameRecord[2] = totalGamesWon;
+                gameRecord[3] = totalGamesLost;
+                gameRecord[4] = totalGamesDrawn;
+                recordsInFile.Add(gameRecord);
+
             }
-            playerStatsReader.Dispose(); return recordsInFile;
+            playerStatsReader.Dispose();
+            return recordsInFile;
 
         }         //---------------------------------------------------------------------------------------------          
 
         //File Writer Methods.     
-        public void writeGame(Game completedGame)
+        public void writeGame(string[] gameData)
         {
             FileStream gamesFileStream = new FileStream("Games.txt", FileMode.Append, FileAccess.Write);
             StreamWriter gamesFileWriter = new StreamWriter(gamesFileStream);
-            Game gameToStore = completedGame;
-            if (gameToStore.PlayerTwoCnic != null && gameToStore.Outcome != 0)
+            if (gameData[2] != null && byte.Parse(gameData[4]) != 0)
             {
-                gamesFileWriter.WriteLine(gameToStore.TableID);
-                gamesFileWriter.WriteLine(gameToStore.PlayerOneCnic);
-                gamesFileWriter.WriteLine(gameToStore.PlayerTwoCnic);
-                gamesFileWriter.WriteLine(gameToStore.DateTimeOfGame);
-                gamesFileWriter.WriteLine(gameToStore.Outcome);
+                gamesFileWriter.WriteLine(gameData[0]);//TABLE ID
+                gamesFileWriter.WriteLine(gameData[1]);//PLAYER ONE CNIC
+                gamesFileWriter.WriteLine(gameData[2]);//PLAYER TWO CNIC
+                gamesFileWriter.WriteLine(gameData[3]);//DATETIMEOFGAME
+                gamesFileWriter.WriteLine(gameData[4]);//OUTCOME
             }
             gamesFileWriter.Flush();
             gamesFileWriter.Dispose();
             gamesFileStream.Dispose();
         }
-        public void writePlayer(Player newPlayer)
+        public void writePlayer(string PlayerName, string CNIC)
         {
             FileStream playerFileStream = new FileStream("Players.txt", FileMode.Append, FileAccess.Write);
             StreamWriter playerFileWriter = new StreamWriter(playerFileStream);
-            playerFileWriter.WriteLine(newPlayer.PlayerName);
-            playerFileWriter.WriteLine(newPlayer.CNIC);
+            playerFileWriter.WriteLine(PlayerName);
+            playerFileWriter.WriteLine(CNIC);
+            string[] playerData = new string[2];
+            playerData[0] = PlayerName;
+            playerData[1] = CNIC;
             playerFileWriter.Flush();
             playerFileWriter.Dispose();
             playerFileStream.Dispose();
-            registeredPlayers.Add(newPlayer);
+            registeredPlayers.Add(playerData);
+
         }
 
-        public void writeRecord(PlayerStats newRecord)
+        public void writeRecord(string CNIC, string TotalGamesPlayed, string TotalGamesWon, string TotalGamesLost, string TotalGamesDrawn)
         {
             FileStream recordFileStream = new FileStream("Records.txt", FileMode.Append, FileAccess.Write);
             StreamWriter recordFileWriter = new StreamWriter(recordFileStream);
-            recordFileWriter.WriteLine(newRecord.CNIC);
-            recordFileWriter.WriteLine(newRecord.TotalGamesPlayed);
-            recordFileWriter.WriteLine(newRecord.TotalGamesWon);
-            recordFileWriter.WriteLine(newRecord.TotalGamesLost);
-            recordFileWriter.WriteLine(newRecord.TotalGamesDrawn);
+            recordFileWriter.WriteLine(CNIC);
+            recordFileWriter.WriteLine(TotalGamesPlayed);
+            recordFileWriter.WriteLine(TotalGamesWon);
+            recordFileWriter.WriteLine(TotalGamesLost);
+            recordFileWriter.WriteLine(TotalGamesDrawn);
+            string[] newRecord = new string[5];
+            newRecord[0] = CNIC;
+            newRecord[1] = TotalGamesPlayed;
+            newRecord[2] = TotalGamesWon;
+            newRecord[3] = TotalGamesLost;
+            newRecord[4] = TotalGamesDrawn;
             recordFileWriter.Flush();
             recordFileWriter.Dispose();
             recordFileStream.Dispose();
             playerStatistics.Add(newRecord);
+
         }         //---------------------------------------------------------------------------------------------         
 
         //Update files.  
@@ -134,14 +155,14 @@ namespace BusinessLogicLayer
             StreamWriter gamesFileWriter = new StreamWriter(gamesFileStream);
             for (int index = 0; index < allGames.Count; index++)
             {
-                Game gameToStore = allGames[index] as Game;
-                if (gameToStore.PlayerTwoCnic != null && gameToStore.Outcome != 0)
+                String[] gameToStore = allGames[index] as String[];
+                if (gameToStore[2] != null && byte.Parse(gameToStore[4]) != 0)
                 {
-                    gamesFileWriter.WriteLine(gameToStore.TableID);
-                    gamesFileWriter.WriteLine(gameToStore.PlayerOneCnic);
-                    gamesFileWriter.WriteLine(gameToStore.PlayerTwoCnic);
-                    gamesFileWriter.WriteLine(gameToStore.DateTimeOfGame);
-                    gamesFileWriter.WriteLine(gameToStore.Outcome);
+                    gamesFileWriter.WriteLine(gameToStore[0].Trim());// TABLE ID
+                    gamesFileWriter.WriteLine(gameToStore[1].Trim());// PLAYER ONE CNIC
+                    gamesFileWriter.WriteLine(gameToStore[2].Trim());// PLAYER TWO CNIC
+                    gamesFileWriter.WriteLine(gameToStore[3].Trim());// DATE TIME OF GAME
+                    gamesFileWriter.WriteLine(gameToStore[4].Trim());// OUTCOME OF THE GAME
                 }
             }
             gamesFileWriter.Flush();
@@ -154,9 +175,9 @@ namespace BusinessLogicLayer
             StreamWriter playersFileWriter = new StreamWriter(playersFileStream);
             for (int index = 0; index < allRegisteredPlayers.Count; index++)
             {
-                Player playerToStore = allRegisteredPlayers[index] as Player;
-                playersFileWriter.WriteLine(playerToStore.PlayerName);
-                playersFileWriter.WriteLine(playerToStore.CNIC);
+                string[] playerToStore = allRegisteredPlayers[index] as string[];
+                playersFileWriter.WriteLine(playerToStore[0].Trim()); // PLAYER NAME
+                playersFileWriter.WriteLine(playerToStore[1].Trim()); // PLAYER CNIC
             }
             playersFileWriter.Flush();
             playersFileWriter.Dispose();
@@ -169,18 +190,21 @@ namespace BusinessLogicLayer
             StreamWriter recordsFileWriter = new StreamWriter(recordsFileStream);
             for (int index = 0; index < allGameRecords.Count; index++)
             {
-                PlayerStats recordToStore = allGameRecords[index] as PlayerStats;
-                recordsFileWriter.WriteLine(recordToStore.CNIC);
-                recordsFileWriter.WriteLine(recordToStore.TotalGamesPlayed);
-                recordsFileWriter.WriteLine(recordToStore.TotalGamesWon);
-                recordsFileWriter.WriteLine(recordToStore.TotalGamesLost);
-                recordsFileWriter.WriteLine(recordToStore.TotalGamesDrawn);
+                string[] recordToStore = allGameRecords[index] as string[];
+                recordsFileWriter.WriteLine(recordToStore[0].Trim());//PLAYER CNIC
+                recordsFileWriter.WriteLine(recordToStore[1].Trim());//TOTAL GAMES PLAYED
+                recordsFileWriter.WriteLine(recordToStore[2].Trim());//TOTAL GAMES WON
+                recordsFileWriter.WriteLine(recordToStore[3].Trim());//TOTAL GAMES LOST
+                recordsFileWriter.WriteLine(recordToStore[4].Trim());//TOTAL GAMES DRAWN
             }
             recordsFileWriter.Flush();
             recordsFileWriter.Dispose();
             recordsFileStream.Dispose();
         }
-        //---------------------------------------------------------------------------------------------             }//End Class. }//End Namespace. 
+
+        
+        //---------------------------------------------------------------------------------------------             
+
 
     }
 }

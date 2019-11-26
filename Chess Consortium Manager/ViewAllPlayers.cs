@@ -16,6 +16,7 @@ namespace Chess_Consortium_Manager
         public ViewAllPlayers()
         {
             InitializeComponent();
+            
         }
 
         private void ViewAllPlayers_Load(object sender, EventArgs e)

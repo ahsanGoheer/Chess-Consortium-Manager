@@ -16,6 +16,8 @@ namespace Chess_Consortium_Manager
         public AssignTable()
         {
             InitializeComponent();
+            playerOneCnicTb.TextChanged += new System.EventHandler(checkPlayerOneCNIC);
+            playerTwoCnicTb.TextChanged += new System.EventHandler(checkPlayerTwoCnic);
         }
 
         private void assignBtn_MouseEnter(object sender, EventArgs e)
@@ -45,37 +47,40 @@ namespace Chess_Consortium_Manager
                     assigned=gameManger.assignGame(newGame);
                     if (assigned)
                     {
-             
-                        MessageBox.Show($"Table Id : {newGame.TableID} has been assigned!", "Confirmation");
+                        
+                        MessageBox.Show($"Table Id : {newGame.TableID} has been assigned!", "Confirmation",MessageBoxButtons.OK,MessageBoxIcon.Information);
 
                     }
                     else
                     {
-                        MessageBox.Show("Table could not be assigned. Please check if table capacity isn't full or Player isn't already playing the game.", "Error");
+                       
+                        MessageBox.Show("Table could not be assigned. Please check if table capacity isn't full or Player isn't already playing the game.", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                     }
                 }
                 else if (addSecondPlayerRb.Checked)
                 {
-                    if (InputValidator.isValidCnic(playerTwoCnicTb.Text))
+                    if (InputValidator.isValidCnic(playerTwoCnicTb.Text.Trim()))
                     {
-                        playerOneCnic = playerOneCnicTb.Text;
-                        playerTwoCnic = playerTwoCnicTb.Text;
+                        playerOneCnic = playerOneCnicTb.Text.Trim();
+                        playerTwoCnic = playerTwoCnicTb.Text.Trim();
                         Game newGame = new Game(playerOneCnic, playerTwoCnic, DateTime.Now);
                         assigned=gameManger.assignGame(newGame);
                         if(assigned)
                         {
-                            MessageBox.Show($"Table Id : {newGame.TableID} has been assigned!", "Confirmation");
+                            MessageBox.Show($"Table Id : {newGame.TableID} has been assigned!", "Confirmation",MessageBoxButtons.OK,MessageBoxIcon.Information);
 
                         }
                         else
                         {
-                            MessageBox.Show("Table could not be assigned. Please check if table capacity isn't full or Player isn't already playing the game.", "Error");
+                            
+                            MessageBox.Show("Table could not be assigned. Please check if table capacity isn't full or Player isn't already playing the game.", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                         }
 
                     }
                     else
                     {
-                        MessageBox.Show($"{playerTwoCnicTb.Text} isn't an incorrect CNIC!", "Error");
+                        
+                        MessageBox.Show($"{playerTwoCnicTb.Text} isn't an incorrect CNIC!", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
 
                     }
 
@@ -84,7 +89,8 @@ namespace Chess_Consortium_Manager
             }
             else
             {
-                MessageBox.Show($"{playerOneCnicTb.Text} isn't an incorrect CNIC!", "Error");
+                
+                MessageBox.Show($"Please Enter A Valid CNIC!", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
 
             }
 
@@ -105,6 +111,35 @@ namespace Chess_Consortium_Manager
         private void AssignTable_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Dispose();
+        }
+
+        public void checkPlayerOneCNIC(object sender,EventArgs e)
+        {
+
+            if (InputValidator.isValidCnic(playerOneCnicTb.Text.Trim()))
+            {
+                errorProvider1.SetError(playerOneCnicTb,"");
+                errorProvider2.SetError(playerOneCnicTb,"Correct!");
+            }
+            else
+            {
+                errorProvider2.SetError(playerOneCnicTb, "");
+                errorProvider1.SetError(playerOneCnicTb,"Incorrect!");
+            }
+           
+        }
+        public void checkPlayerTwoCnic(object sender,EventArgs e)
+        {
+            if (InputValidator.isValidCnic(playerTwoCnicTb.Text.Trim()))
+            {
+                errorProvider1.SetError(playerTwoCnicTb,"");
+                errorProvider2.SetError(playerTwoCnicTb, "Correct!");
+            }
+            else
+            {
+                errorProvider2.SetError(playerTwoCnicTb, "");
+                errorProvider1.SetError(playerTwoCnicTb, "Incorrect!");
+            }
         }
 
         private void AssignTable_Load(object sender, EventArgs e)

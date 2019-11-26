@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using DataLayer;
 namespace BusinessLogicLayer
 {
     public class Manager
@@ -22,9 +22,8 @@ namespace BusinessLogicLayer
         //Constructor. 
         private Manager()
         {
-            FileHandler dataHandler = new FileHandler();
-            registeredPlayers = dataHandler.RegisteredPlayers;
-            playerStatistics = dataHandler.PlayerStatistics;
+            registeredPlayers = playerList();
+            playerStatistics = statsList();
         }    
       
         public static Manager Instance
@@ -104,10 +103,7 @@ namespace BusinessLogicLayer
                 locatedStats = playerStatistics[locatedIndex] as PlayerStats;
 
             }
-            else
-            {
-              
-            }
+          
 
             return locatedStats;
         }
@@ -145,8 +141,16 @@ namespace BusinessLogicLayer
                 Player temp = registeredPlayers[index] as Player;
                 playerInformation += temp.getPlayerInfo();
                 PlayerStats getStats = fetchStats(temp.CNIC);
-                playerInformation += getStats.printStats();
-                playerInformation += "****************************************\n";
+                if(getStats==null)
+                {
+                    playerInformation += "Nothing";
+                }
+                else
+                {
+                    playerInformation += getStats.printStats();
+                    playerInformation += "****************************************\n";
+                }
+                
             }
             return playerInformation;
         }
@@ -188,7 +192,8 @@ namespace BusinessLogicLayer
                         updateStats(temp.PlayerTwoCnic, 3);
                     }
                     FileHandler gameFileHandler = new FileHandler();
-                    gameFileHandler.writeGame(temp);
+                    
+                    gameFileHandler.writeGame(gameToStrArray(temp));
                     onGoingGames.Remove(temp);
                     break;
                 }
@@ -367,7 +372,7 @@ namespace BusinessLogicLayer
         }
         public string showTableInfo()
         {
-            string tablesInfo = "";
+            string tablesInfo ="";
             for (int index = 0; index < onGoingGames.Count; index++)
             {
                 Game onGoingGame = onGoingGames[index] as Game;
@@ -378,22 +383,100 @@ namespace BusinessLogicLayer
         }
 
         //---------------------------------------------------------------------------------------------- 
+
+        //Convert to Player list.
+        public ArrayList playerList()
+        {
+            ArrayList storedPlayers = new ArrayList();
+            FileHandler DataHandler = new FileHandler();
+            foreach(string[] temp in DataHandler.RegisteredPlayers)
+            {
+                Player newPlayer = new Player(temp[1],temp[0]);
+                storedPlayers.Add(newPlayer);
+            }
+            return storedPlayers;
+        }
+        //Convert To Stats list.
+        public ArrayList statsList()
+        {
+            ArrayList playerStats = new ArrayList();
+            FileHandler DataHandler = new FileHandler();
+            foreach(string[] temp in DataHandler.PlayerStatistics)
+            {
+                PlayerStats newStats = new PlayerStats(temp[0],int.Parse(temp[1]),int.Parse(temp[2]),int.Parse(temp[3]),int.Parse(temp[4]));
+                playerStats.Add(newStats);
+            }
+            return playerStats;
+
+        }
+        //Convert Game to String Array
+        public string[] gameToStrArray(Game game)
+        {
+            string[] gameData = new string[5];
+            gameData[0]=game.TableID;
+            gameData[1] = game.PlayerOneCnic;
+            gameData[2] = game.PlayerTwoCnic;
+            gameData[3] = game.DateTimeOfGame.ToString();
+            gameData[4] = game.Outcome.ToString();
+            return gameData;
+        }
+        //Convert Player List to String Array List
+        public ArrayList playerToStrArrayList(ArrayList players)
+        {
+            ArrayList playerStrArrays = new ArrayList();
+            foreach(Player temp in players)
+            {
+                string[] player = new string[2];
+                player[0] = temp.CNIC;
+                player[1] = temp.PlayerName;
+                playerStrArrays.Add(player);
+            }
+            return playerStrArrays;
+        }
+        //Convert Player Stats to String Array List
+        public ArrayList playerStatsToStrArrayList(ArrayList playStats)
+        {
+            ArrayList playerStatsList = new ArrayList();
+            foreach(PlayerStats temp in playStats)
+            {
+                string[] stats = new string[5];
+                stats[0]=temp.CNIC;
+                stats[1] = temp.TotalGamesPlayed.ToString();
+                stats[2] = temp.TotalGamesWon.ToString();
+                stats[3] = temp.TotalGamesLost.ToString();
+                stats[4] = temp.TotalGamesDrawn.ToString();
+                playerStatsList.Add(stats);
+            }
+            return playerStatsList;
+        }
         //FileUpdater.
         public void UpdatePlayers()
         {
             FileHandler updateHandler = new FileHandler();
-            updateHandler.updatePlayersFile(registeredPlayers);
+            updateHandler.updatePlayersFile(playerToStrArrayList(registeredPlayers));
         }
         public void UpdateStats()
         {
             FileHandler updateHandler = new FileHandler();
-            updateHandler.updateStatsFile(playerStatistics);
+            updateHandler.updateStatsFile(playerStatsToStrArrayList(playerStatistics));
         }
-        //Destructor. 
-        ~Manager()
+        //Check if table is occupied.
+        public bool isOccupied(string TableID)
         {
-           
-
+            bool check = false;
+            Game requiredGame = null;
+            foreach(Game temp in onGoingGames)
+            {
+                if(TableID==temp.TableID)
+                {
+                    requiredGame = temp;
+                }
+            }
+            if(requiredGame.PlayerOneCnic!=null&&requiredGame.PlayerTwoCnic!=null)
+            {
+                check = true;
+            }
+            return check;
         }
         //--------------------------------------------------------------------------------------------- 
     }

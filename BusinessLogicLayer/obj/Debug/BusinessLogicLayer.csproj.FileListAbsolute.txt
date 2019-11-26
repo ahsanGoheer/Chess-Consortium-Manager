@@ -9,3 +9,6 @@ C:\Users\ahsan\source\repos\Chess Consortium Manager\BusinessLogicLayer\obj\Debu
 C:\Users\ahsan\source\repos\Chess Consortium Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
 C:\Users\ahsan\source\repos\Chess Consortium Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
 C:\Users\ahsan\source\repos\Chess Consortium Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
+C:\Users\ahsan\source\repos\Chess Consortium Manager\BusinessLogicLayer\bin\Debug\DataLayer.dll
+C:\Users\ahsan\source\repos\Chess Consortium Manager\BusinessLogicLayer\bin\Debug\DataLayer.pdb
+C:\Users\ahsan\source\repos\Chess Consortium Manager\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CopyComplete

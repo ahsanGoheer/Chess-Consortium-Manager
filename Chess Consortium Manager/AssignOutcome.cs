@@ -49,23 +49,43 @@ namespace Chess_Consortium_Manager
 
         private void AssignBtn_Click(object sender, EventArgs e)
         {
-            string tableID = tableIDCb.SelectedItem.ToString() ;
-            if(playerOneRb.Checked)
+
+            try
             {
-                consortiumManager.assignOutcome(tableID, 1);
+                string tableID = tableIDCb.SelectedItem.ToString();
+                if (consortiumManager.isOccupied(tableID))
+                {
+                    if (playerOneRb.Checked)
+                    {
+                        consortiumManager.assignOutcome(tableID, 1);
+                    }
+                    else if (playerTwoRb.Checked)
+                    {
+                        consortiumManager.assignOutcome(tableID, 2);
+                    }
+                    else if (drawRb.Checked)
+                    {
+                        consortiumManager.assignOutcome(tableID, 3);
+                    }
+                    consortiumManager.UpdateStats();
+                    errorProvider2.SetError(tableIDCb,"Correct");
+                    MessageBox.Show("Outcome has been assigned.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tableIDCb.ResetText();
+                    drawRb.Checked = true;
+                }
+                else
+                {
+                    MessageBox.Show("This table does not have a second player.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else if(playerTwoRb.Checked)
+            catch(System.NullReferenceException)
             {
-                consortiumManager.assignOutcome(tableID, 2);
+                errorProvider1.SetError(tableIDCb,"Select a valid table id.");
+                MessageBox.Show("Please enter a valid table id.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(drawRb.Checked)
-            {
-                consortiumManager.assignOutcome(tableID, 3);
-            }
-            consortiumManager.UpdateStats();
-            MessageBox.Show("Outcome has been assigned.", "Confirmation");
-            tableIDCb.ResetText();
-            drawRb.Checked = true;
+
         }
+            
+            
     }
 }

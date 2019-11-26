@@ -42,7 +42,9 @@
             this.showAllTablesBtn = new System.Windows.Forms.Button();
             this.assignTableBtn = new System.Windows.Forms.Button();
             this.registerPlayerBtn = new System.Windows.Forms.Button();
+            this.exitBtn = new System.Windows.Forms.PictureBox();
             this.selectAnOperationGb.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exitBtn)).BeginInit();
             this.SuspendLayout();
             // 
             // selectAnOperationGb
@@ -60,12 +62,13 @@
             this.selectAnOperationGb.Controls.Add(this.registerPlayerLbl);
             this.selectAnOperationGb.Controls.Add(this.registerPlayerBtn);
             this.selectAnOperationGb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.selectAnOperationGb.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectAnOperationGb.Location = new System.Drawing.Point(12, 12);
+            this.selectAnOperationGb.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectAnOperationGb.ForeColor = System.Drawing.Color.PaleGreen;
+            this.selectAnOperationGb.Location = new System.Drawing.Point(253, 109);
             this.selectAnOperationGb.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.selectAnOperationGb.Name = "selectAnOperationGb";
             this.selectAnOperationGb.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.selectAnOperationGb.Size = new System.Drawing.Size(440, 596);
+            this.selectAnOperationGb.Size = new System.Drawing.Size(848, 499);
             this.selectAnOperationGb.TabIndex = 0;
             this.selectAnOperationGb.TabStop = false;
             this.selectAnOperationGb.Text = "Select an Operation";
@@ -73,18 +76,19 @@
             // searchAPlayerLbl
             // 
             this.searchAPlayerLbl.AutoSize = true;
-            this.searchAPlayerLbl.Location = new System.Drawing.Point(280, 523);
+            this.searchAPlayerLbl.Location = new System.Drawing.Point(647, 249);
             this.searchAPlayerLbl.Name = "searchAPlayerLbl";
-            this.searchAPlayerLbl.Size = new System.Drawing.Size(101, 19);
+            this.searchAPlayerLbl.Size = new System.Drawing.Size(141, 25);
             this.searchAPlayerLbl.TabIndex = 11;
             this.searchAPlayerLbl.Text = "Search a Player";
+            this.searchAPlayerLbl.Click += new System.EventHandler(this.SearchAPlayerLbl_Click);
             // 
             // viewAllPlayersLbl
             // 
             this.viewAllPlayersLbl.AutoSize = true;
-            this.viewAllPlayersLbl.Location = new System.Drawing.Point(51, 523);
+            this.viewAllPlayersLbl.Location = new System.Drawing.Point(642, 390);
             this.viewAllPlayersLbl.Name = "viewAllPlayersLbl";
-            this.viewAllPlayersLbl.Size = new System.Drawing.Size(102, 19);
+            this.viewAllPlayersLbl.Size = new System.Drawing.Size(143, 25);
             this.viewAllPlayersLbl.TabIndex = 10;
             this.viewAllPlayersLbl.Text = "View all Players";
             // 
@@ -93,7 +97,7 @@
             this.assignOutcomeLbl.AutoSize = true;
             this.assignOutcomeLbl.Location = new System.Drawing.Point(275, 359);
             this.assignOutcomeLbl.Name = "assignOutcomeLbl";
-            this.assignOutcomeLbl.Size = new System.Drawing.Size(110, 19);
+            this.assignOutcomeLbl.Size = new System.Drawing.Size(149, 25);
             this.assignOutcomeLbl.TabIndex = 9;
             this.assignOutcomeLbl.Text = "Assign Outcome";
             // 
@@ -102,7 +106,7 @@
             this.showAllTablesLbl.AutoSize = true;
             this.showAllTablesLbl.Location = new System.Drawing.Point(51, 359);
             this.showAllTablesLbl.Name = "showAllTablesLbl";
-            this.showAllTablesLbl.Size = new System.Drawing.Size(99, 19);
+            this.showAllTablesLbl.Size = new System.Drawing.Size(140, 25);
             this.showAllTablesLbl.TabIndex = 8;
             this.showAllTablesLbl.Text = "Show all Tables";
             // 
@@ -111,7 +115,7 @@
             this.assignTableLbl.AutoSize = true;
             this.assignTableLbl.Location = new System.Drawing.Point(280, 186);
             this.assignTableLbl.Name = "assignTableLbl";
-            this.assignTableLbl.Size = new System.Drawing.Size(94, 19);
+            this.assignTableLbl.Size = new System.Drawing.Size(131, 25);
             this.assignTableLbl.TabIndex = 7;
             this.assignTableLbl.Text = "Assign a Table";
             // 
@@ -120,7 +124,7 @@
             this.registerPlayerLbl.AutoSize = true;
             this.registerPlayerLbl.Location = new System.Drawing.Point(48, 186);
             this.registerPlayerLbl.Name = "registerPlayerLbl";
-            this.registerPlayerLbl.Size = new System.Drawing.Size(110, 19);
+            this.registerPlayerLbl.Size = new System.Drawing.Size(151, 25);
             this.registerPlayerLbl.TabIndex = 1;
             this.registerPlayerLbl.Text = "Register a Player";
             // 
@@ -129,7 +133,7 @@
             this.searchAPlayerBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.searchAPlayerBtn.BackgroundImage = global::Chess_Consortium_Manager.Properties.Resources.Magnifying_Glass_512;
             this.searchAPlayerBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.searchAPlayerBtn.Location = new System.Drawing.Point(275, 415);
+            this.searchAPlayerBtn.Location = new System.Drawing.Point(639, 136);
             this.searchAPlayerBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchAPlayerBtn.Name = "searchAPlayerBtn";
             this.searchAPlayerBtn.Size = new System.Drawing.Size(109, 96);
@@ -142,7 +146,7 @@
             this.viewPlayersBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.viewPlayersBtn.BackgroundImage = global::Chess_Consortium_Manager.Properties.Resources._1_sport_team_game_players_sport_512;
             this.viewPlayersBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.viewPlayersBtn.Location = new System.Drawing.Point(48, 415);
+            this.viewPlayersBtn.Location = new System.Drawing.Point(639, 282);
             this.viewPlayersBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.viewPlayersBtn.Name = "viewPlayersBtn";
             this.viewPlayersBtn.Size = new System.Drawing.Size(109, 96);
@@ -181,10 +185,10 @@
             this.assignTableBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.assignTableBtn.BackgroundImage = global::Chess_Consortium_Manager.Properties.Resources.Table_02;
             this.assignTableBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.assignTableBtn.Location = new System.Drawing.Point(275, 75);
+            this.assignTableBtn.Location = new System.Drawing.Point(226, 75);
             this.assignTableBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.assignTableBtn.Name = "assignTableBtn";
-            this.assignTableBtn.Size = new System.Drawing.Size(109, 96);
+            this.assignTableBtn.Size = new System.Drawing.Size(186, 96);
             this.assignTableBtn.TabIndex = 2;
             this.assignTableBtn.UseVisualStyleBackColor = false;
             this.assignTableBtn.Click += new System.EventHandler(this.assignTableBtn_Click);
@@ -194,7 +198,7 @@
             this.registerPlayerBtn.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.registerPlayerBtn.BackgroundImage = global::Chess_Consortium_Manager.Properties.Resources.male_shadow_circle_512;
             this.registerPlayerBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.registerPlayerBtn.Location = new System.Drawing.Point(48, 75);
+            this.registerPlayerBtn.Location = new System.Drawing.Point(65, 62);
             this.registerPlayerBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.registerPlayerBtn.Name = "registerPlayerBtn";
             this.registerPlayerBtn.Size = new System.Drawing.Size(109, 96);
@@ -202,20 +206,39 @@
             this.registerPlayerBtn.UseVisualStyleBackColor = false;
             this.registerPlayerBtn.Click += new System.EventHandler(this.registerPlayerBtn_Click);
             // 
+            // exitBtn
+            // 
+            this.exitBtn.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.exitBtn.Image = global::Chess_Consortium_Manager.Properties.Resources.icons8_close_window_80;
+            this.exitBtn.Location = new System.Drawing.Point(1062, 12);
+            this.exitBtn.Name = "exitBtn";
+            this.exitBtn.Size = new System.Drawing.Size(39, 39);
+            this.exitBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.exitBtn.TabIndex = 2;
+            this.exitBtn.TabStop = false;
+            this.exitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
+            this.exitBtn.MouseEnter += new System.EventHandler(this.ExitBtn_MouseEnter);
+            this.exitBtn.MouseLeave += new System.EventHandler(this.ExitBtn_MouseLeave);
+            // 
             // mainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 622);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.ClientSize = new System.Drawing.Size(1123, 622);
+            this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.selectAnOperationGb);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "mainForm";
             this.Text = "Chess Consortium Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.selectAnOperationGb.ResumeLayout(false);
             this.selectAnOperationGb.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exitBtn)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -235,6 +258,7 @@
         private System.Windows.Forms.Label assignOutcomeLbl;
         private System.Windows.Forms.Label viewAllPlayersLbl;
         private System.Windows.Forms.Label searchAPlayerLbl;
+        private System.Windows.Forms.PictureBox exitBtn;
     }
 }
 

@@ -15,6 +15,7 @@ namespace Chess_Consortium_Manager
         public SearchAPlayer()
         {
             InitializeComponent();
+            playerIDTb.TextChanged += new System.EventHandler(checkCNIC);
         }
 
         private void SearchBtn_MouseEnter(object sender, EventArgs e)
@@ -32,24 +33,53 @@ namespace Chess_Consortium_Manager
         private void SearchBtn_Click(object sender, EventArgs e)
         {
             Manager consortiumManager = Manager.Instance;
-            string playerCnic = playerIDTb.Text;
+            string playerCnic = playerIDTb.Text.Trim();
             string playerData = consortiumManager.searchPlayer(playerCnic);
-            if(playerData!=null)
+            try
             {
-                resultRtb.Text = playerData;
+                if (playerData != null)
+                {
+                    resultRtb.Text = playerData;
 
+                }
+                else
+                {
+
+                    throw new NoDataToShowException("Player Not Found!");
+                }
             }
-            else
+            catch(NoDataToShowException)
             {
-                resultRtb.Text = "Player not found!";
+                MessageBox.Show("No Player Found!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
-            playerIDTb.Text = "";
+            finally
+            {
+                playerIDTb.Text = "";
+            }
+            errorProvider1.SetError(playerIDTb, "");
+            errorProvider2.SetError(playerIDTb, "");
+           
         }
 
         private void SearchAPlayer_Load(object sender, EventArgs e)
         {
 
         }
+
+        private void checkCNIC(object sender,EventArgs e)
+        {
+            if(InputValidator.isValidCnic(playerIDTb.Text.Trim()))
+            {
+                errorProvider1.SetError(playerIDTb,"");
+                errorProvider2.SetError(playerIDTb,"Correct!");
+            }
+            else
+            {
+                errorProvider2.SetError(playerIDTb,"");
+                errorProvider1.SetError(playerIDTb,"Incorrect!");
+            }
+        }
+
 
         private void SearchAPlayer_FormClosing(object sender, FormClosingEventArgs e)
         {

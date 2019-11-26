@@ -47,6 +47,7 @@
             // 
             // playersRtb
             // 
+            this.playersRtb.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.playersRtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.playersRtb.Location = new System.Drawing.Point(3, 26);
             this.playersRtb.Name = "playersRtb";

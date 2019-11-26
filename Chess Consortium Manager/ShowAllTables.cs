@@ -30,5 +30,10 @@ namespace Chess_Consortium_Manager
         {
             this.Dispose();
         }
+
+        private void TablesGb_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

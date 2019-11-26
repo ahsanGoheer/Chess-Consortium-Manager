@@ -28,15 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssignOutcome));
             this.selectOutcomeGb = new System.Windows.Forms.GroupBox();
-            this.tableIDCb = new System.Windows.Forms.ComboBox();
-            this.tableIDLbl = new System.Windows.Forms.Label();
-            this.playerOneRb = new System.Windows.Forms.RadioButton();
-            this.playerTwoRb = new System.Windows.Forms.RadioButton();
-            this.drawRb = new System.Windows.Forms.RadioButton();
             this.assignBtn = new System.Windows.Forms.Button();
+            this.drawRb = new System.Windows.Forms.RadioButton();
+            this.playerTwoRb = new System.Windows.Forms.RadioButton();
+            this.playerOneRb = new System.Windows.Forms.RadioButton();
+            this.tableIDLbl = new System.Windows.Forms.Label();
+            this.tableIDCb = new System.Windows.Forms.ComboBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.selectOutcomeGb.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             this.SuspendLayout();
             // 
             // selectOutcomeGb
@@ -54,57 +59,6 @@
             this.selectOutcomeGb.TabStop = false;
             this.selectOutcomeGb.Text = "Select Outcome";
             // 
-            // tableIDCb
-            // 
-            this.tableIDCb.FormattingEnabled = true;
-            this.tableIDCb.Location = new System.Drawing.Point(153, 43);
-            this.tableIDCb.Name = "tableIDCb";
-            this.tableIDCb.Size = new System.Drawing.Size(149, 24);
-            this.tableIDCb.TabIndex = 0;
-            this.tableIDCb.Text = "Select Table ID";
-            // 
-            // tableIDLbl
-            // 
-            this.tableIDLbl.AutoSize = true;
-            this.tableIDLbl.Location = new System.Drawing.Point(66, 46);
-            this.tableIDLbl.Name = "tableIDLbl";
-            this.tableIDLbl.Size = new System.Drawing.Size(65, 17);
-            this.tableIDLbl.TabIndex = 1;
-            this.tableIDLbl.Text = "Table ID:";
-            // 
-            // playerOneRb
-            // 
-            this.playerOneRb.AutoSize = true;
-            this.playerOneRb.Location = new System.Drawing.Point(22, 93);
-            this.playerOneRb.Name = "playerOneRb";
-            this.playerOneRb.Size = new System.Drawing.Size(135, 21);
-            this.playerOneRb.TabIndex = 1;
-            this.playerOneRb.TabStop = true;
-            this.playerOneRb.Text = "Player One Wins";
-            this.playerOneRb.UseVisualStyleBackColor = true;
-            // 
-            // playerTwoRb
-            // 
-            this.playerTwoRb.AutoSize = true;
-            this.playerTwoRb.Location = new System.Drawing.Point(168, 93);
-            this.playerTwoRb.Name = "playerTwoRb";
-            this.playerTwoRb.Size = new System.Drawing.Size(134, 21);
-            this.playerTwoRb.TabIndex = 2;
-            this.playerTwoRb.TabStop = true;
-            this.playerTwoRb.Text = "Player Two Wins";
-            this.playerTwoRb.UseVisualStyleBackColor = true;
-            // 
-            // drawRb
-            // 
-            this.drawRb.AutoSize = true;
-            this.drawRb.Location = new System.Drawing.Point(331, 93);
-            this.drawRb.Name = "drawRb";
-            this.drawRb.Size = new System.Drawing.Size(61, 21);
-            this.drawRb.TabIndex = 3;
-            this.drawRb.TabStop = true;
-            this.drawRb.Text = "Draw";
-            this.drawRb.UseVisualStyleBackColor = true;
-            // 
             // assignBtn
             // 
             this.assignBtn.FlatAppearance.BorderSize = 2;
@@ -120,6 +74,66 @@
             this.assignBtn.MouseEnter += new System.EventHandler(this.AssignBtn_MouseEnter);
             this.assignBtn.MouseLeave += new System.EventHandler(this.AssignBtn_MouseLeave);
             // 
+            // drawRb
+            // 
+            this.drawRb.AutoSize = true;
+            this.drawRb.Location = new System.Drawing.Point(331, 93);
+            this.drawRb.Name = "drawRb";
+            this.drawRb.Size = new System.Drawing.Size(61, 21);
+            this.drawRb.TabIndex = 3;
+            this.drawRb.TabStop = true;
+            this.drawRb.Text = "Draw";
+            this.drawRb.UseVisualStyleBackColor = true;
+            // 
+            // playerTwoRb
+            // 
+            this.playerTwoRb.AutoSize = true;
+            this.playerTwoRb.Location = new System.Drawing.Point(168, 93);
+            this.playerTwoRb.Name = "playerTwoRb";
+            this.playerTwoRb.Size = new System.Drawing.Size(134, 21);
+            this.playerTwoRb.TabIndex = 2;
+            this.playerTwoRb.TabStop = true;
+            this.playerTwoRb.Text = "Player Two Wins";
+            this.playerTwoRb.UseVisualStyleBackColor = true;
+            // 
+            // playerOneRb
+            // 
+            this.playerOneRb.AutoSize = true;
+            this.playerOneRb.Location = new System.Drawing.Point(22, 93);
+            this.playerOneRb.Name = "playerOneRb";
+            this.playerOneRb.Size = new System.Drawing.Size(135, 21);
+            this.playerOneRb.TabIndex = 1;
+            this.playerOneRb.TabStop = true;
+            this.playerOneRb.Text = "Player One Wins";
+            this.playerOneRb.UseVisualStyleBackColor = true;
+            // 
+            // tableIDLbl
+            // 
+            this.tableIDLbl.AutoSize = true;
+            this.tableIDLbl.Location = new System.Drawing.Point(66, 46);
+            this.tableIDLbl.Name = "tableIDLbl";
+            this.tableIDLbl.Size = new System.Drawing.Size(65, 17);
+            this.tableIDLbl.TabIndex = 1;
+            this.tableIDLbl.Text = "Table ID:";
+            // 
+            // tableIDCb
+            // 
+            this.tableIDCb.FormattingEnabled = true;
+            this.tableIDCb.Location = new System.Drawing.Point(153, 43);
+            this.tableIDCb.Name = "tableIDCb";
+            this.tableIDCb.Size = new System.Drawing.Size(149, 24);
+            this.tableIDCb.TabIndex = 0;
+            this.tableIDCb.Text = "Select Table ID";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // errorProvider2
+            // 
+            this.errorProvider2.ContainerControl = this;
+            this.errorProvider2.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider2.Icon")));
+            // 
             // AssignOutcome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -134,6 +148,8 @@
             this.Load += new System.EventHandler(this.AssignOutcome_Load);
             this.selectOutcomeGb.ResumeLayout(false);
             this.selectOutcomeGb.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -147,5 +163,7 @@
         private System.Windows.Forms.RadioButton playerTwoRb;
         private System.Windows.Forms.RadioButton playerOneRb;
         private System.Windows.Forms.Button assignBtn;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ErrorProvider errorProvider2;
     }
 }
