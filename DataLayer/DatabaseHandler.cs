@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace DataLayer
 {
-    class DatabaseHandler
+    public class DatabaseHandler
     {
         private SqlConnection DBConnection;
         private SqlDataAdapter DataAdapter;
@@ -22,7 +22,7 @@ namespace DataLayer
 
         public DatabaseHandler()
         {
-            DBConnection = new SqlConnection(@"Data Source=DESKTOP-0OD63RJ;Initial Catalog=CCube;Integrated Security=True");
+            DBConnection = new SqlConnection(@"Data Source=DESKTOP-ED4GQK7;Initial Catalog=Chess Consortium;Integrated Security=True");
             DBConnection.Open();
             ResultSet = new DataSet();
         }
@@ -31,7 +31,7 @@ namespace DataLayer
 
         public void ConnectToDB(string s)
         {
-            DBConnection = new SqlConnection(@"Data Source=ali;Initial Catalog=" + s + ";Integrated Security=True");
+            DBConnection = new SqlConnection(@"Data Source=DESKTOP-ED4GQK7;Initial Catalog=" + s + ";Integrated Security=True");
             DBConnection.Open();
             ResultSet = new DataSet();
         }
@@ -60,7 +60,14 @@ namespace DataLayer
             return Result;
 
         }
+        public int InsertQuery(string Query)
+        {
+            QueryCommand = new SqlCommand(Query, DBConnection);
+            int Result = QueryCommand.ExecuteNonQuery();
+            QueryCommand.Dispose();
+            return Result;
 
+        }
         public int UpdateQuerySet(DataSet ds, string Query)
         {
             DataAdapter = new SqlDataAdapter(Query, DBConnection);

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 using DataLayer;
@@ -48,19 +49,24 @@ namespace BusinessLogicLayer
 
 
             bool alreadyRegistered = true;
+            DatabaseHandler registrationHandler = new DatabaseHandler();
             if (!playerRegistered(newPlayer.CNIC))
             {
-                registeredPlayers.Add(newPlayer);
-               
-                PlayerStats newPlayerStats = new PlayerStats(newPlayer.CNIC);
-                playerStatistics.Add(newPlayerStats);
+                string playerInsertQuery = $"Insert into Player(PlayerName,PlayerCnic) values('{newPlayer.PlayerName}','{newPlayer.CNIC}')";
+                int status=registrationHandler.InsertQuery(playerInsertQuery);
+                //registeredPlayers.Add(newPlayer);
+                if(status==1)
+                {
+                    PlayerStats newPlayerStats = new PlayerStats(newPlayer.CNIC);
+                    string playerStatsInsertQuery = $"Insert into PlayerStats(PlayerID,GamesPlayed,GamesWon,GamesLost,GamesDrawn) values('{newPlayerStats.CNIC}','{newPlayerStats.TotalGamesPlayed}','{newPlayerStats.TotalGamesWon}','{newPlayerStats.TotalGamesLost}','{newPlayerStats.TotalGamesDrawn}')";
+                    registrationHandler.InsertQuery(playerStatsInsertQuery);
+                    registrationHandler.CloseConnection();
+                }
+                //playerStatistics.Add(newPlayerStats);
                 alreadyRegistered = false;
 
             }
-            else
-            {
-                alreadyRegistered = true;
-            }
+         
             return alreadyRegistered;
 
         }
@@ -68,18 +74,15 @@ namespace BusinessLogicLayer
         public bool playerRegistered(string playerCnic)
         {
             bool isRegistered = false;
-          
-            Player temp = null;
-            for (int index = 0; index < registeredPlayers.Count; index++)
+            DatabaseHandler registrationHandler = new DatabaseHandler();
+            string query = "Select COUNT(PlayerCnic) from Player where PlayerCnic= '" + playerCnic+"'";
+            object result=registrationHandler.SpecificQuery(query);
+            int count = (int)result;
+            if(count==1)
             {
-                temp = registeredPlayers[index] as Player;
-                if (playerCnic == temp.CNIC)
-                {
-                    
-                    isRegistered = true;
-                    break;
-                }
+                isRegistered = true;
             }
+            registrationHandler.CloseConnection();
             return isRegistered;
         }
 
@@ -88,19 +91,32 @@ namespace BusinessLogicLayer
           
             PlayerStats locatedStats = null;
             bool statsExist = false;
-            int locatedIndex = 0;
-            for (int index = 0; index < playerStatistics.Count; index++)
+       
+            DatabaseHandler playerStatsHandler = new DatabaseHandler();
+            string query = $"Select * from PlayerStats where PlayerID = '{playerCnic}'";
+            DataSet statsData = playerStatsHandler.ExceuteQuerySet(query);
+            if(statsData.Tables[0].Rows.Count!=0)
             {
-                if (playerCnic == (playerStatistics[index] as PlayerStats).CNIC)
-                {
-                    locatedIndex = index;
-                    statsExist = true;
-                    break;
-                }
+                statsExist = true;
             }
+            //for (int index = 0; index < playerStatistics.Count; index++)
+            //{
+            //    if (playerCnic == (playerStatistics[index] as PlayerStats).CNIC)
+            //    {
+            //        locatedIndex = index;
+            //        statsExist = true;
+            //        break;
+            //    }
+            //}
             if (statsExist)
             {
-                locatedStats = playerStatistics[locatedIndex] as PlayerStats;
+                string cnic = statsData.Tables[0].Rows[0][0].ToString();
+                string TotalGamesPlayed = statsData.Tables[0].Rows[0][1].ToString();
+                string GamesWon = statsData.Tables[0].Rows[0][2].ToString();
+                string GamesLost = statsData.Tables[0].Rows[0][3].ToString();
+                string GamesDrawn = statsData.Tables[0].Rows[0][4].ToString();
+                PlayerStats fetchedStats = new PlayerStats(cnic,int.Parse(TotalGamesPlayed),int.Parse(GamesWon),int.Parse(GamesLost),int.Parse(GamesDrawn));
+                locatedStats =fetchedStats;
 
             }
           
