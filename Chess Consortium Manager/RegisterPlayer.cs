@@ -46,8 +46,8 @@ namespace Chess_Consortium_Manager
                 else
                 {
                     MessageBox.Show("New player has been registered!", "Confirmation",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    consortiumManager.UpdatePlayers();
-                    consortiumManager.UpdateStats();
+                    //consortiumManager.UpdatePlayers();
+                    //consortiumManager.UpdateStats();
                 }
             }
             else

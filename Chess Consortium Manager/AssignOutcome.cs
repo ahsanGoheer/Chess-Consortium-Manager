@@ -67,7 +67,7 @@ namespace Chess_Consortium_Manager
                     {
                         consortiumManager.assignOutcome(tableID, 3);
                     }
-                    consortiumManager.UpdateStats();
+                    //consortiumManager.UpdateStats();
                     errorProvider2.SetError(tableIDCb,"Correct");
                     MessageBox.Show("Outcome has been assigned.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     tableIDCb.ResetText();

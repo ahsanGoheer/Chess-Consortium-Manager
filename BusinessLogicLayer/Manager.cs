@@ -15,16 +15,16 @@ namespace BusinessLogicLayer
         private static Manager instance = null;
 
         ArrayList onGoingGames = new ArrayList(9);
-        ArrayList registeredPlayers = new ArrayList();
-        ArrayList playerStatistics = new ArrayList();
+        //ArrayList registeredPlayers = new ArrayList();
+        //ArrayList playerStatistics = new ArrayList();
 
         //---------------------------------------------------------------------------------------------- 
 
         //Constructor. 
         private Manager()
         {
-            registeredPlayers = playerList();
-            playerStatistics = statsList();
+            //registeredPlayers = playerList();
+            //playerStatistics = statsList();
         }    
       
         public static Manager Instance
@@ -95,6 +95,7 @@ namespace BusinessLogicLayer
             DatabaseHandler playerStatsHandler = new DatabaseHandler();
             string query = $"Select * from PlayerStats where PlayerID = '{playerCnic}'";
             DataSet statsData = playerStatsHandler.ExceuteQuerySet(query);
+            playerStatsHandler.CloseConnection();
             if(statsData.Tables[0].Rows.Count!=0)
             {
                 statsExist = true;
@@ -126,48 +127,59 @@ namespace BusinessLogicLayer
 
         public string searchPlayer(string playerCnic)
         {
-            bool isFound = false;
+            
             string Info = null;
             Player locatedPlayer = null;
-            for (int index = 0; index < registeredPlayers.Count; index++)
+            DatabaseHandler playerSearchHandler = new DatabaseHandler();
+            string query = $"Select p.PlayerCnic,p.PlayerName,ps.GamesPlayed,ps.GamesWon,ps.GamesLost,ps.GamesDrawn from dbo.Player p JOIN dbo.PlayerStats ps ON p.PlayerCnic = ps.PlayerID where  p.PlayerCnic='{playerCnic}'";
+            DataSet playerData =  playerSearchHandler.ExceuteQuerySet(query);
+            playerSearchHandler.CloseConnection();
+            if(playerData.Tables[0].Rows.Count!=0)
             {
-                locatedPlayer = registeredPlayers[index] as Player;
-                if (locatedPlayer.CNIC == playerCnic)
-                {
-                    isFound = true;
-                    break;
-                }
-            }
-            if (isFound)
-            {
-                PlayerStats locatedStats = fetchStats(locatedPlayer.CNIC);
+                locatedPlayer = new Player(playerData.Tables[0].Rows[0][1].ToString(), playerData.Tables[0].Rows[0][0].ToString());
                 Info = locatedPlayer.getPlayerInfo();
-                Info += locatedStats.printStats();
+                PlayerStats locatedPlayerStats = new PlayerStats(playerData.Tables[0].Rows[0][0].ToString(),(int)playerData.Tables[0].Rows[0][2],(int)playerData.Tables[0].Rows[0][3],(int)playerData.Tables[0].Rows[0][4],(int)playerData.Tables[0].Rows[0][5]);
+                Info += locatedPlayerStats.printStats();
             }
-           
+            
             return Info;
         }
 
         public string viewAllRegisteredPlayer()
         {
             string playerInformation = null;
-           
-            for (int index = 0; index < registeredPlayers.Count; index++)
+            DatabaseHandler registeredPlayerHandler = new DatabaseHandler();
+            string query = "Select p.PlayerCnic,p.PlayerName,ps.GamesPlayed,ps.GamesWon,ps.GamesLost,ps.GamesDrawn from dbo.Player p JOIN dbo.PlayerStats ps ON p.PlayerCnic = ps.PlayerID";
+            DataSet registeredPlayerData = registeredPlayerHandler.ExceuteQuerySet(query);
+            registeredPlayerHandler.CloseConnection();
+            if(registeredPlayerData.Tables[0].Rows.Count!=0)
             {
-                Player temp = registeredPlayers[index] as Player;
-                playerInformation += temp.getPlayerInfo();
-                PlayerStats getStats = fetchStats(temp.CNIC);
-                if(getStats==null)
+                foreach(DataRow temp in registeredPlayerData.Tables[0].Rows)
                 {
-                    playerInformation += "Nothing";
-                }
-                else
-                {
-                    playerInformation += getStats.printStats();
+                    Player fetchedPlayer = new Player(temp[1].ToString(), temp[0].ToString());//PLAYER NAME AND CNIC
+                    playerInformation += fetchedPlayer.getPlayerInfo();
+                    PlayerStats fetchedPlayerStats = new PlayerStats(temp[0].ToString(),(int)temp[2],(int)temp[3],(int)temp[4],(int)temp[5]);//CNIC, GAMES PLAYED,GAMES WON,GAMES LOST,GAMES DRAWN
+                    playerInformation += fetchedPlayerStats.printStats();
                     playerInformation += "****************************************\n";
+
+
                 }
-                
             }
+
+            //for (int index = 0; index < registeredPlayers.Count; index++)
+            //{
+            //    Player temp = registeredPlayers[index] as Player;
+            //    playerInformation += temp.getPlayerInfo();
+            //    PlayerStats getStats = fetchStats(temp.CNIC);
+            //    if(getStats==null)
+            //    {
+            //        playerInformation += "Nothing";
+            //    }
+            //    else
+            //    {
+            //        playerInformation += getStats.printStats();
+            //        playerInformation += "****************************************\n";
+            //    }
             return playerInformation;
         }
         public List<string> tableIDs()
@@ -207,39 +219,73 @@ namespace BusinessLogicLayer
                         updateStats(temp.PlayerOneCnic, 3);
                         updateStats(temp.PlayerTwoCnic, 3);
                     }
-                    FileHandler gameFileHandler = new FileHandler();
-                    
-                    gameFileHandler.writeGame(gameToStrArray(temp));
-                    onGoingGames.Remove(temp);
+
+                    if(InsertGame(temp))
+                    {
+                        onGoingGames.Remove(temp);
+
+                    }
                     break;
                 }
 
             }
         }
+        public bool InsertGame(Game newGame)
+        {
+            DatabaseHandler gameRecordHandler = new DatabaseHandler();
+            string query = $"Insert into Game(TableID,PlayerOneCnic,PlayerTwoCnic,DateTimeOfGame,Outcome) values('{newGame.TableID}','{newGame.PlayerOneCnic}','{newGame.PlayerTwoCnic}','{newGame.DateTimeOfGame}',{newGame.Outcome})";
+            int status =gameRecordHandler.InsertQuery(query);
+            gameRecordHandler.CloseConnection();
+            if(status==1)
+            {
+                return true;
+            }
+            return false;
+           
+        }
 
         public void updateStats(string cnic, byte outcome)
         {
-            for (int index = 0; index < playerStatistics.Count; index++)
+            DatabaseHandler statsOutcomeHandler = new DatabaseHandler();
+            string query = $"Select * from PlayerStats where PlayerId='{cnic}'";
+            DataSet fetchedStats = statsOutcomeHandler.ExceuteQuerySet(query);
+            bool outcomeAssigned = false;
+            if(fetchedStats.Tables[0].Rows.Count!=0)
             {
-                PlayerStats reqStats = playerStatistics[index] as PlayerStats;
-                if (reqStats.CNIC == cnic)
+                DataRow statsDataRow = fetchedStats.Tables[0].Rows[0];
+                PlayerStats reqStats = new PlayerStats(statsDataRow[0].ToString(), (int)statsDataRow[1], (int)statsDataRow[2], (int)statsDataRow[3], (int)statsDataRow[4]);
+                if (reqStats.CNIC.Trim() == cnic.Trim())
                 {
                     if (outcome == 1)
                     {
                         reqStats.gameWon();
+                        outcomeAssigned = true;
                     }
                     else if (outcome == 2)
                     {
                         reqStats.gameLost();
+                        outcomeAssigned = true;
+
                     }
                     else if (outcome == 3)
                     {
                         reqStats.gameDrawn();
-                    }
-                    break;
-                }
+                        outcomeAssigned = true;
 
+                    }
+
+                }
+                if(outcomeAssigned)
+                {
+                    string updateQuery = $"Update PlayerStats set GamesPlayed={reqStats.TotalGamesPlayed}, GamesWon={reqStats.TotalGamesWon},GamesLost={reqStats.TotalGamesLost},GamesDrawn={reqStats.TotalGamesDrawn} where PlayerID='{reqStats.CNIC}'";
+                    statsOutcomeHandler.UpdateQuery(updateQuery);
+                    statsOutcomeHandler.CloseConnection();
+                }
             }
+           
+            
+
+            
         }
         //---------------------------------------------------------------------------------------------- 
 
@@ -252,7 +298,7 @@ namespace BusinessLogicLayer
             bool gameAssigned = false;
             if (!isAlreadyPlaying(newGame.PlayerOneCnic) && !isAlreadyPlaying(newGame.PlayerTwoCnic))
             {
-                if (isRegistered(newGame.PlayerOneCnic) && newGame.PlayerTwoCnic == null)
+                if (playerRegistered(newGame.PlayerOneCnic) && newGame.PlayerTwoCnic == null)
                 {
                     if (isPending())
                     {
@@ -286,7 +332,7 @@ namespace BusinessLogicLayer
                         }
                     }
                 }
-                else if ((isRegistered(newGame.PlayerOneCnic) && isRegistered(newGame.PlayerTwoCnic)) && newGame.PlayerTwoCnic != null)
+                else if ((playerRegistered(newGame.PlayerOneCnic) && playerRegistered(newGame.PlayerTwoCnic)) && newGame.PlayerTwoCnic != null)
                 {
                     if (isPending())
                     {
@@ -362,21 +408,7 @@ namespace BusinessLogicLayer
             }
             return isPendingOpponent;
         }
-        public bool isRegistered(string playerCnic)
-        {
-            bool exists = false;
-            for (int index = 0; index < registeredPlayers.Count; index++)
-            {
-                Player temp = registeredPlayers[index] as Player;
-                if (playerCnic == temp.CNIC)
-                {
-                    exists = true;
-                    break;
-                }
-
-            }
-            return exists;
-        }
+        
         public bool isAvailable()
         {
             bool hasTable = false;
@@ -400,83 +432,7 @@ namespace BusinessLogicLayer
 
         //---------------------------------------------------------------------------------------------- 
 
-        //Convert to Player list.
-        public ArrayList playerList()
-        {
-            ArrayList storedPlayers = new ArrayList();
-            FileHandler DataHandler = new FileHandler();
-            foreach(string[] temp in DataHandler.RegisteredPlayers)
-            {
-                Player newPlayer = new Player(temp[1],temp[0]);
-                storedPlayers.Add(newPlayer);
-            }
-            return storedPlayers;
-        }
-        //Convert To Stats list.
-        public ArrayList statsList()
-        {
-            ArrayList playerStats = new ArrayList();
-            FileHandler DataHandler = new FileHandler();
-            foreach(string[] temp in DataHandler.PlayerStatistics)
-            {
-                PlayerStats newStats = new PlayerStats(temp[0],int.Parse(temp[1]),int.Parse(temp[2]),int.Parse(temp[3]),int.Parse(temp[4]));
-                playerStats.Add(newStats);
-            }
-            return playerStats;
-
-        }
-        //Convert Game to String Array
-        public string[] gameToStrArray(Game game)
-        {
-            string[] gameData = new string[5];
-            gameData[0]=game.TableID;
-            gameData[1] = game.PlayerOneCnic;
-            gameData[2] = game.PlayerTwoCnic;
-            gameData[3] = game.DateTimeOfGame.ToString();
-            gameData[4] = game.Outcome.ToString();
-            return gameData;
-        }
-        //Convert Player List to String Array List
-        public ArrayList playerToStrArrayList(ArrayList players)
-        {
-            ArrayList playerStrArrays = new ArrayList();
-            foreach(Player temp in players)
-            {
-                string[] player = new string[2];
-                player[0] = temp.CNIC;
-                player[1] = temp.PlayerName;
-                playerStrArrays.Add(player);
-            }
-            return playerStrArrays;
-        }
-        //Convert Player Stats to String Array List
-        public ArrayList playerStatsToStrArrayList(ArrayList playStats)
-        {
-            ArrayList playerStatsList = new ArrayList();
-            foreach(PlayerStats temp in playStats)
-            {
-                string[] stats = new string[5];
-                stats[0]=temp.CNIC;
-                stats[1] = temp.TotalGamesPlayed.ToString();
-                stats[2] = temp.TotalGamesWon.ToString();
-                stats[3] = temp.TotalGamesLost.ToString();
-                stats[4] = temp.TotalGamesDrawn.ToString();
-                playerStatsList.Add(stats);
-            }
-            return playerStatsList;
-        }
-        //FileUpdater.
-        public void UpdatePlayers()
-        {
-            FileHandler updateHandler = new FileHandler();
-            updateHandler.updatePlayersFile(playerToStrArrayList(registeredPlayers));
-        }
-        public void UpdateStats()
-        {
-            FileHandler updateHandler = new FileHandler();
-            updateHandler.updateStatsFile(playerStatsToStrArrayList(playerStatistics));
-        }
-        //Check if table is occupied.
+        ////Check if table is occupied.
         public bool isOccupied(string TableID)
         {
             bool check = false;
