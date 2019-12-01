@@ -15,6 +15,7 @@ namespace Chess_Consortium_Manager
         public mainForm()
         {
             InitializeComponent();
+            registerMouseEvent();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -22,70 +23,11 @@ namespace Chess_Consortium_Manager
             Application.Exit();
         }
 
-        private void registerPlayerBtn_Click(object sender, EventArgs e)
-        {
-            RegisterPlayer newForm = new RegisterPlayer();
-            newForm.Show();
-            this.Hide();
-            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
-        }
-
-        private void assignTableBtn_Click(object sender, EventArgs e)
-        {
-            AssignTable newForm = new AssignTable();
-            newForm.Show();
-            this.Hide();
-            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
-        }
-
-        private void ShowAllTablesBtn_Click(object sender, EventArgs e)
-        {
-            ShowAllTables newForm = new ShowAllTables();
-            newForm.Show();
-            this.Hide();
-            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
-        }
-
-        private void AssignOutcomeBtn_Click(object sender, EventArgs e)
-        {
-            AssignOutcome newForm = new AssignOutcome();
-            newForm.Show();
-            this.Hide();
-            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
-        }
-
-        private void ViewPlayersBtn_Click(object sender, EventArgs e)
-        {
-            ViewAllPlayers newForm = new ViewAllPlayers();
-            newForm.Show();
-            this.Hide();
-            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
-        }
-
-        private void SearchAPlayerBtn_Click(object sender, EventArgs e)
-        {
-            SearchAPlayer newForm = new SearchAPlayer();
-            newForm.Show();
-            this.Hide();
-            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
-        }
-        private void showMe(object sender,EventArgs e)
+        private void showMe(object sender, EventArgs e)
         {
             this.Show();
         }
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SearchAPlayerLbl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-       
-
-        
+     
         private void ExitBtn_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -100,5 +42,71 @@ namespace Chess_Consortium_Manager
         {
             exitBtn.BackColor = Color.WhiteSmoke;
         }
-    }
-}
+        private void RegisterPlayerBtn_Click_1(object sender, EventArgs e)
+        {
+            RegisterPlayer newForm = new RegisterPlayer();
+            newForm.Show();
+            this.Hide();
+            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
+        }
+
+        private void AssignTableBtn_Click_1(object sender, EventArgs e)
+        {
+
+            AssignTable newForm = new AssignTable();
+            newForm.Show();
+            this.Hide();
+            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
+        }
+
+        private void SearchAPlayerBtn_Click_1(object sender, EventArgs e)
+        {
+            SearchAPlayer newForm = new SearchAPlayer();
+            newForm.Show();
+            this.Hide();
+            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
+        }
+
+        private void ShowAllTablesBtn_Click_1(object sender, EventArgs e)
+        {
+            ShowAllTables newForm = new ShowAllTables();
+            newForm.Show();
+            this.Hide();
+            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
+        }
+
+        private void AssignOutcomeBtn_Click_1(object sender, EventArgs e)
+        {
+            AssignOutcome newForm = new AssignOutcome();
+            newForm.Show();
+            this.Hide();
+            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
+        }
+
+        private void ViewPlayersBtn_Click_1(object sender, EventArgs e)
+        {
+            ViewAllPlayers newForm = new ViewAllPlayers();
+            newForm.Show();
+            this.Hide();
+            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
+        }
+
+        private void registerMouseEvent()
+        {
+            foreach(Button temp in operationsPanel.Controls.OfType<Button>())
+            {
+                temp.MouseEnter += (object sender, EventArgs e) => colorChangeOnEnter(sender, e, temp);
+                temp.MouseLeave += (object sender, EventArgs e) => colorChangeOnLeave(sender, e, temp);
+            }
+        }
+
+        private void colorChangeOnEnter(object sender,EventArgs e,Button selectedBtn)
+        {
+            selectedBtn.ForeColor = Color.SeaGreen;
+        }
+        private void colorChangeOnLeave(object sender, EventArgs e, Button selectedBtn)
+        {
+            selectedBtn.ForeColor = Color.DarkSlateGray;
+        }
+    }//End Class.
+}//End Namespace.

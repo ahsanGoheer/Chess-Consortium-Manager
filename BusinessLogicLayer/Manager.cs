@@ -8,25 +8,26 @@ using System.Threading.Tasks;
 using DataLayer;
 namespace BusinessLogicLayer
 {
-    public class Manager
+    public class Manager //Facade controller as Singleton.
     {
         //Attributes. 
         private static readonly object padlock = new object();
         private static Manager instance = null;
-
         ArrayList onGoingGames = new ArrayList(9);
-        //ArrayList registeredPlayers = new ArrayList();
-        //ArrayList playerStatistics = new ArrayList();
-
         //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
+
 
         //Constructor. 
         private Manager()
-        {
-            //registeredPlayers = playerList();
-            //playerStatistics = statsList();
-        }    
-      
+        {    }
+        //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
+
+
+        //Returns the only instance of the facade controller.
         public static Manager Instance
         {
             get
@@ -41,10 +42,13 @@ namespace BusinessLogicLayer
                 }
             }
         }
-    //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
 
-    //Methods for managing players. 
-    public bool registerNewPlayer(Player newPlayer)
+
+        //Methods for Managing Players. 
+        public bool registerNewPlayer(Player newPlayer)
         {
 
 
@@ -62,7 +66,7 @@ namespace BusinessLogicLayer
                     registrationHandler.InsertQuery(playerStatsInsertQuery);
                     registrationHandler.CloseConnection();
                 }
-                //playerStatistics.Add(newPlayerStats);
+                
                 alreadyRegistered = false;
 
             }
@@ -70,60 +74,85 @@ namespace BusinessLogicLayer
             return alreadyRegistered;
 
         }
+        //---------------------------------------------------------------------------------------------- 
+        public ArrayList RankPlayers()
+        {
+            ArrayList statsList = fetchStats();
+            ArrayList Ranks = new ArrayList(10);
+            statsList.Sort(new StatsComparer());
+            int counter = 0;
+            if(statsList.Count>10)
+            {
+                counter = 10;
+            }
+            else
+            {
+                counter = statsList.Count-1;
+            }
+            for(int i=counter;i>0;i--)
+            {
+                string[] rankList = new string[3];
+                rankList[0] =(statsList[i] as PlayerStats).CNIC;
+                rankList[1] = $"RANK: {(counter+1)-i}";
+                rankList[2]= (statsList[i] as PlayerStats).TotalGamesWon.ToString();
+                Ranks.Add(rankList);
+            }
+            return Ranks;
+        }
+
+        public string fetchName(string Cnic)
+        {
+            DatabaseHandler playerSearchHandler = new DatabaseHandler();
+            string query = $"Select PlayerName from Player where  PlayerCnic='{Cnic}'";
+            DataSet playerData = playerSearchHandler.ExceuteQuerySet(query);
+            playerSearchHandler.CloseConnection();
+            return playerData.Tables[0].Rows[0][0].ToString();
+        }
+        //---------------------------------------------------------------------------------------------- 
 
         public bool playerRegistered(string playerCnic)
         {
             bool isRegistered = false;
-            DatabaseHandler registrationHandler = new DatabaseHandler();
-            string query = "Select COUNT(PlayerCnic) from Player where PlayerCnic= '" + playerCnic+"'";
-            object result=registrationHandler.SpecificQuery(query);
-            int count = (int)result;
-            if(count==1)
+            if(playerCnic!="")
             {
-                isRegistered = true;
+                DatabaseHandler registrationHandler = new DatabaseHandler();
+                string query = "Select COUNT(PlayerCnic) from Player where PlayerCnic= '" + playerCnic + "'";
+                object result = registrationHandler.SpecificQuery(query);
+                int count = (int)result;
+                if (count == 1)
+                {
+                    isRegistered = true;
+                }
+                registrationHandler.CloseConnection();
             }
-            registrationHandler.CloseConnection();
+            
             return isRegistered;
         }
+        //---------------------------------------------------------------------------------------------- 
 
-        public PlayerStats fetchStats(string playerCnic)
+        public ArrayList fetchStats()
         {
           
-            PlayerStats locatedStats = null;
-            bool statsExist = false;
-       
+            ArrayList locatedStats=new ArrayList();
             DatabaseHandler playerStatsHandler = new DatabaseHandler();
-            string query = $"Select * from PlayerStats where PlayerID = '{playerCnic}'";
+            string query = $"Select * from PlayerStats";
             DataSet statsData = playerStatsHandler.ExceuteQuerySet(query);
             playerStatsHandler.CloseConnection();
-            if(statsData.Tables[0].Rows.Count!=0)
+          foreach (DataRow temp in statsData.Tables[0].Rows)
             {
-                statsExist = true;
-            }
-            //for (int index = 0; index < playerStatistics.Count; index++)
-            //{
-            //    if (playerCnic == (playerStatistics[index] as PlayerStats).CNIC)
-            //    {
-            //        locatedIndex = index;
-            //        statsExist = true;
-            //        break;
-            //    }
-            //}
-            if (statsExist)
-            {
-                string cnic = statsData.Tables[0].Rows[0][0].ToString();
-                string TotalGamesPlayed = statsData.Tables[0].Rows[0][1].ToString();
-                string GamesWon = statsData.Tables[0].Rows[0][2].ToString();
-                string GamesLost = statsData.Tables[0].Rows[0][3].ToString();
-                string GamesDrawn = statsData.Tables[0].Rows[0][4].ToString();
-                PlayerStats fetchedStats = new PlayerStats(cnic,int.Parse(TotalGamesPlayed),int.Parse(GamesWon),int.Parse(GamesLost),int.Parse(GamesDrawn));
-                locatedStats =fetchedStats;
+                string cnic = temp[0].ToString();
+                string TotalGamesPlayed = temp[1].ToString();
+                string GamesWon = temp[2].ToString();
+                string GamesLost = temp[3].ToString();
+                string GamesDrawn = temp[4].ToString();
+                PlayerStats fetchedStats = new PlayerStats(cnic, int.Parse(TotalGamesPlayed), int.Parse(GamesWon), int.Parse(GamesLost), int.Parse(GamesDrawn));
+                locatedStats.Add(fetchedStats);
 
             }
-          
 
             return locatedStats;
         }
+        //---------------------------------------------------------------------------------------------- 
 
         public string searchPlayer(string playerCnic)
         {
@@ -144,6 +173,34 @@ namespace BusinessLogicLayer
             
             return Info;
         }
+        //---------------------------------------------------------------------------------------------- 
+
+        public string searchPlayerByName(string playerName)
+        {
+
+            string Info = null;
+            Player locatedPlayer = null;
+            DatabaseHandler playerSearchHandler = new DatabaseHandler();
+            string query = $"Select p.PlayerCnic,p.PlayerName,ps.GamesPlayed,ps.GamesWon,ps.GamesLost,ps.GamesDrawn from dbo.Player p JOIN dbo.PlayerStats ps ON p.PlayerCnic = ps.PlayerID where  p.PlayerName='{playerName}'";
+            DataSet playerData = playerSearchHandler.ExceuteQuerySet(query);
+            playerSearchHandler.CloseConnection();
+            if (playerData.Tables[0].Rows.Count != 0)
+            {
+                Info = "";
+                foreach(DataRow temp in playerData.Tables[0].Rows)
+                {
+                    locatedPlayer = new Player(temp[1].ToString(), temp[0].ToString());
+                    Info += "*************************\n";
+                    Info += locatedPlayer.getPlayerInfo();
+                    PlayerStats locatedPlayerStats = new PlayerStats(temp[0].ToString(), (int)temp[2], (int)temp[3], (int)temp[4], (int)temp[5]);
+                    Info += locatedPlayerStats.printStats();
+                }
+                
+            }
+
+            return Info;
+        }
+        //---------------------------------------------------------------------------------------------- 
 
         public string viewAllRegisteredPlayer()
         {
@@ -166,22 +223,33 @@ namespace BusinessLogicLayer
                 }
             }
 
-            //for (int index = 0; index < registeredPlayers.Count; index++)
-            //{
-            //    Player temp = registeredPlayers[index] as Player;
-            //    playerInformation += temp.getPlayerInfo();
-            //    PlayerStats getStats = fetchStats(temp.CNIC);
-            //    if(getStats==null)
-            //    {
-            //        playerInformation += "Nothing";
-            //    }
-            //    else
-            //    {
-            //        playerInformation += getStats.printStats();
-            //        playerInformation += "****************************************\n";
-            //    }
+           
             return playerInformation;
         }
+        //---------------------------------------------------------------------------------------------- 
+        public ArrayList fetchRegisteredPlayers()
+        {
+            ArrayList PlayersList = new ArrayList();
+            DatabaseHandler registeredPlayerHandler = new DatabaseHandler();
+            string query = "Select p.PlayerCnic,p.PlayerName from dbo.Player p";
+            DataSet registeredPlayerData = registeredPlayerHandler.ExceuteQuerySet(query);
+            registeredPlayerHandler.CloseConnection();
+            if (registeredPlayerData.Tables[0].Rows.Count != 0)
+            {
+                foreach (DataRow temp in registeredPlayerData.Tables[0].Rows)
+                {
+                    Player fetchedPlayer = new Player(temp[1].ToString(), temp[0].ToString());//PLAYER NAME AND CNIC
+                    PlayersList.Add(fetchedPlayer);
+                    
+
+                }
+            }
+
+
+            return PlayersList;
+        }
+        //---------------------------------------------------------------------------------------------- 
+
         public List<string> tableIDs()
         {
             List<string> IDs = new List<string>();
@@ -192,8 +260,28 @@ namespace BusinessLogicLayer
             return IDs;
         }
         //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
 
-        //Manager Controls for The Program. 
+
+        //Manager Control Methods.
+        public void deleteAPlayer(string Cnic)
+        {
+            if(playerRegistered(Cnic))
+            {
+                DatabaseHandler playerDeletionHandler = new DatabaseHandler();
+                string query = $"Delete from PlayerStats where PlayerID='{Cnic}'";
+                playerDeletionHandler.UpdateQuery(query);
+                string playerDeleteQuery = $"Delete from Player where PlayerCnic='{Cnic}'";
+                playerDeletionHandler.UpdateQuery(playerDeleteQuery);
+            }
+            else
+            {
+                throw new NoDataToShowException("Player not registered!");
+            }
+        }
+        //---------------------------------------------------------------------------------------------- 
+
         public void assignOutcome(string TableId,byte choice)
         {
             for (int index = 0; index < onGoingGames.Count; index++)
@@ -230,6 +318,8 @@ namespace BusinessLogicLayer
 
             }
         }
+        //---------------------------------------------------------------------------------------------- 
+
         public bool InsertGame(Game newGame)
         {
             DatabaseHandler gameRecordHandler = new DatabaseHandler();
@@ -243,6 +333,7 @@ namespace BusinessLogicLayer
             return false;
            
         }
+        //---------------------------------------------------------------------------------------------- 
 
         public void updateStats(string cnic, byte outcome)
         {
@@ -250,7 +341,7 @@ namespace BusinessLogicLayer
             string query = $"Select * from PlayerStats where PlayerId='{cnic}'";
             DataSet fetchedStats = statsOutcomeHandler.ExceuteQuerySet(query);
             bool outcomeAssigned = false;
-            if(fetchedStats.Tables[0].Rows.Count!=0)
+            if (fetchedStats.Tables[0].Rows.Count != 0)
             {
                 DataRow statsDataRow = fetchedStats.Tables[0].Rows[0];
                 PlayerStats reqStats = new PlayerStats(statsDataRow[0].ToString(), (int)statsDataRow[1], (int)statsDataRow[2], (int)statsDataRow[3], (int)statsDataRow[4]);
@@ -275,18 +366,15 @@ namespace BusinessLogicLayer
                     }
 
                 }
-                if(outcomeAssigned)
+                if (outcomeAssigned)
                 {
                     string updateQuery = $"Update PlayerStats set GamesPlayed={reqStats.TotalGamesPlayed}, GamesWon={reqStats.TotalGamesWon},GamesLost={reqStats.TotalGamesLost},GamesDrawn={reqStats.TotalGamesDrawn} where PlayerID='{reqStats.CNIC}'";
                     statsOutcomeHandler.UpdateQuery(updateQuery);
                     statsOutcomeHandler.CloseConnection();
                 }
-            }
-           
-            
-
-            
+            }    
         }
+        //---------------------------------------------------------------------------------------------- 
         //---------------------------------------------------------------------------------------------- 
 
 
@@ -369,6 +457,7 @@ namespace BusinessLogicLayer
             return gameAssigned;
 
         }
+        //---------------------------------------------------------------------------------------------- 
 
         public bool isAlreadyPlaying(string playerCnic)
         {
@@ -393,6 +482,7 @@ namespace BusinessLogicLayer
             return check;
 
         }
+        //---------------------------------------------------------------------------------------------- 
 
 
         public bool isPending()
@@ -408,7 +498,8 @@ namespace BusinessLogicLayer
             }
             return isPendingOpponent;
         }
-        
+        //---------------------------------------------------------------------------------------------- 
+
         public bool isAvailable()
         {
             bool hasTable = false;
@@ -418,6 +509,8 @@ namespace BusinessLogicLayer
             }
             return hasTable;
         }
+        //---------------------------------------------------------------------------------------------- 
+
         public string showTableInfo()
         {
             string tablesInfo ="";
@@ -429,7 +522,24 @@ namespace BusinessLogicLayer
             }
             return tablesInfo;
         }
+        //---------------------------------------------------------------------------------------------- 
+        public string getTableData(string TableId)
+        {
+            string tableData = null;
+            for(int index=0;index<onGoingGames.Count;index++)
+            {
+                Game onGoingGame = onGoingGames[index] as Game;
+                if(onGoingGame.TableID==TableId)
+                {
+                    tableData = onGoingGame.GetTableInfo();
+                    break;
+                }
+            }
+            return tableData;
+        }
 
+        //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
         //---------------------------------------------------------------------------------------------- 
 
         ////Check if table is occupied.
@@ -450,7 +560,9 @@ namespace BusinessLogicLayer
             }
             return check;
         }
+        //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
         //--------------------------------------------------------------------------------------------- 
-    }
-}
+    }//End Class.
+}//End Namespace.
 

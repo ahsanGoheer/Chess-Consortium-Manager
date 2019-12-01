@@ -47,6 +47,7 @@
       <DependentUpon>Chess_ConsortiumDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Game.cs" />
+    <Compile Include="StatsComparer.cs" />
     <Compile Include="InputValidator.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="NoDataToShowException.cs" />

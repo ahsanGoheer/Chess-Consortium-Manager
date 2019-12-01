@@ -12,22 +12,24 @@ namespace Chess_Consortium_Manager
 {
     public partial class RegisterPlayer : Form
     {
+        //Constructor.
         public RegisterPlayer()
         {
             InitializeComponent();
+            registerMouseEvent();
             playerCnicTb.TextChanged += new System.EventHandler(checkCnic);
             playerNameTb.TextChanged += new System.EventHandler(checkName);
         }
+        //----------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------
 
-        private void RegisterPlayer_Load(object sender, EventArgs e)
-        {
 
-        }
-
+        //Code to register a new player.
         private void RegisterPlayer_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Dispose();
         }
+        //----------------------------------------------------------------------------------------------------------
 
         private void registerBtn_Click(object sender, EventArgs e)
         {
@@ -46,8 +48,6 @@ namespace Chess_Consortium_Manager
                 else
                 {
                     MessageBox.Show("New player has been registered!", "Confirmation",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    //consortiumManager.UpdatePlayers();
-                    //consortiumManager.UpdateStats();
                 }
             }
             else
@@ -63,18 +63,22 @@ namespace Chess_Consortium_Manager
 
             
         }
+        //----------------------------------------------------------------------------------------------------------
 
         private void registerBtn_MouseEnter(object sender, EventArgs e)
         {
             registerBtn.BackColor = Color.Green;
             registerBtn.ForeColor = Color.White;
         }
+        //----------------------------------------------------------------------------------------------------------
 
         private void registerBtn_MouseLeave(object sender, EventArgs e)
         {
             registerBtn.BackColor = DefaultBackColor;
             registerBtn.ForeColor = DefaultForeColor;
         }
+        //----------------------------------------------------------------------------------------------------------
+
         private void checkCnic(object sender,EventArgs e)
         {
             if(InputValidator.isValidCnic(playerCnicTb.Text.ToString().Trim()))
@@ -88,6 +92,8 @@ namespace Chess_Consortium_Manager
                 errorProvider1.SetError(playerCnicTb,"Incorrect!");
             }
         }
+        //----------------------------------------------------------------------------------------------------------
+
         private void checkName(object sender,EventArgs e )
         {
             if (InputValidator.isValidName(playerNameTb.Text.ToString().Trim()))
@@ -101,12 +107,48 @@ namespace Chess_Consortium_Manager
                 errorProvider1.SetError(playerNameTb, "Incorrect!");
             }
         }
+        //----------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------
 
-        private void registerBtn_MouseClick(object sender, MouseEventArgs e)
+        //Form Exit Methods.
+        private void ExitBtn_Click(object sender, EventArgs e)
         {
-            
+            this.Dispose();
+            Application.Exit(); 
+        }
+        //----------------------------------------------------------------------------------------------------------
+
+        private void HomeBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
 
         }
-    }
-}
+        //----------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------
+
+        //Mouse Enter and Leave Events.
+        private void registerMouseEvent()
+        {
+            this.homeBtn.MouseEnter += (object sender, EventArgs e) => onEnterColorChange(sender, e, this.homeBtn);
+            this.homeBtn.MouseLeave += (object sender, EventArgs e) => onLeaveColorChange(sender, e, this.homeBtn);
+            this.exitBtn.MouseEnter += (object sender, EventArgs e) => onEnterColorChange(sender, e, this.exitBtn);
+            this.exitBtn.MouseLeave+= (object sender, EventArgs e) => onLeaveColorChange(sender, e, this.exitBtn);
+        }
+        //----------------------------------------------------------------------------------------------------------
+
+        private void onEnterColorChange(object sender,EventArgs e,PictureBox temp)
+        {
+            temp.BackColor = Color.Firebrick;
+        }
+        //----------------------------------------------------------------------------------------------------------
+
+        private void onLeaveColorChange(object sender, EventArgs e,PictureBox temp)
+        {
+            temp.BackColor = Color.WhiteSmoke;
+        }
+        //----------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------
+
+    }//End Class.
+}//End Namespace.
 

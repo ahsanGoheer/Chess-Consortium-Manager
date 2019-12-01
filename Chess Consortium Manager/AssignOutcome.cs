@@ -12,15 +12,20 @@ namespace Chess_Consortium_Manager
 {
     public partial class AssignOutcome : Form
     {
-        Manager consortiumManager = Manager.Instance;
-
+        //Constructor.
         public AssignOutcome()
         {
             InitializeComponent();
+            registerMouseEvent();
         }
+        //----------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------
 
+        //Load Tables to Combo Box.
         private void AssignOutcome_Load(object sender, EventArgs e)
         {
+            Manager consortiumManager = Manager.Instance;
+
             List<string> tableIds = consortiumManager.tableIDs();
             foreach(string Id in tableIds)
             {
@@ -29,26 +34,27 @@ namespace Chess_Consortium_Manager
             }
 
         }
+        //----------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------
 
-        private void AssignOutcome_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            this.Dispose();
-        }
-
+        //Code to Assign Outcome.
         private void AssignBtn_MouseEnter(object sender, EventArgs e)
         {
             assignBtn.BackColor = Color.Green;
             assignBtn.ForeColor = Color.White;
         }
+        //----------------------------------------------------------------------------------------------------------
 
         private void AssignBtn_MouseLeave(object sender, EventArgs e)
         {
             assignBtn.BackColor = DefaultBackColor;
             assignBtn.ForeColor = DefaultForeColor;
         }
+        //----------------------------------------------------------------------------------------------------------
 
         private void AssignBtn_Click(object sender, EventArgs e)
         {
+            Manager consortiumManager = Manager.Instance;
 
             try
             {
@@ -67,7 +73,7 @@ namespace Chess_Consortium_Manager
                     {
                         consortiumManager.assignOutcome(tableID, 3);
                     }
-                    //consortiumManager.UpdateStats();
+                   
                     errorProvider2.SetError(tableIDCb,"Correct");
                     MessageBox.Show("Outcome has been assigned.", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     tableIDCb.ResetText();
@@ -85,7 +91,45 @@ namespace Chess_Consortium_Manager
             }
 
         }
-            
-            
-    }
-}
+        //----------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------
+
+        //Mouse Enter and Leave Events.
+        private void registerMouseEvent()
+        {
+            this.homeBtn.MouseEnter += (object sender, EventArgs e) => onEnterColorChange(sender, e, this.homeBtn);
+            this.homeBtn.MouseLeave += (object sender, EventArgs e) => onLeaveColorChange(sender, e, this.homeBtn);
+            this.exitBtn.MouseEnter += (object sender, EventArgs e) => onEnterColorChange(sender, e, this.exitBtn);
+            this.exitBtn.MouseLeave += (object sender, EventArgs e) => onLeaveColorChange(sender, e, this.exitBtn);
+        }
+        //----------------------------------------------------------------------------------------------------------
+
+        private void onEnterColorChange(object sender, EventArgs e, PictureBox temp)
+        {
+            temp.BackColor = Color.Firebrick;
+        }
+        //----------------------------------------------------------------------------------------------------------
+
+        private void onLeaveColorChange(object sender, EventArgs e, PictureBox temp)
+        {
+            temp.BackColor = Color.WhiteSmoke;
+        }
+        //----------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------
+        //Form Closing Method.
+        private void HomeBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        //----------------------------------------------------------------------------------------------------------
+
+        private void ExitBtn_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+            Application.Exit();
+        }
+        //----------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------
+
+    }//End Class.
+}//End Namespace.

@@ -12,14 +12,16 @@ namespace Chess_Consortium_Manager
 {
     public partial class AssignTable : Form
     {
-        Manager gameManger = Manager.Instance;
         public AssignTable()
         {
             InitializeComponent();
+            registerMouseEvent();
             playerOneCnicTb.TextChanged += new System.EventHandler(checkPlayerOneCNIC);
             playerTwoCnicTb.TextChanged += new System.EventHandler(checkPlayerTwoCnic);
         }
 
+
+        //Code to Assign Table to Players.
         private void assignBtn_MouseEnter(object sender, EventArgs e)
         {
             assignBtn.BackColor = Color.Green;
@@ -34,7 +36,10 @@ namespace Chess_Consortium_Manager
 
         private void assignBtn_Click(object sender, EventArgs e)
         {
-            if(InputValidator.isValidCnic(playerOneCnicTb.Text))
+
+            Manager gameManger = Manager.Instance;
+
+            if (InputValidator.isValidCnic(playerOneCnicTb.Text.Trim()))
             {
                 bool assigned = false;
                
@@ -42,7 +47,7 @@ namespace Chess_Consortium_Manager
                 string playerTwoCnic = null;
                 if (dontAddSecondPlayerRb.Checked)
                 {
-                    playerOneCnic = playerOneCnicTb.Text;
+                    playerOneCnic = playerOneCnicTb.Text.Trim();
                     Game newGame = new Game(playerOneCnic, playerTwoCnic, DateTime.Now);
                     assigned=gameManger.assignGame(newGame);
                     if (assigned)
@@ -79,8 +84,13 @@ namespace Chess_Consortium_Manager
                     }
                     else
                     {
-                        
-                        MessageBox.Show($"{playerTwoCnicTb.Text} isn't an incorrect CNIC!", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        if(playerTwoCnicTb.Text.Trim()=="")
+                        {
+                            MessageBox.Show($"Player Two Cnic is missing!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                        else
+                            MessageBox.Show($"{playerTwoCnicTb.Text.Trim()} isn't a correct CNIC!", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
 
                     }
 
@@ -108,11 +118,11 @@ namespace Chess_Consortium_Manager
             playerTwoCnicTb.Visible = false;
         }
 
-        private void AssignTable_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            this.Dispose();
-        }
+       
+        //----------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------
 
+        //Set Error Providers.
         public void checkPlayerOneCNIC(object sender,EventArgs e)
         {
 
@@ -141,10 +151,44 @@ namespace Chess_Consortium_Manager
                 errorProvider1.SetError(playerTwoCnicTb, "Incorrect!");
             }
         }
+        //----------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------
 
-        private void AssignTable_Load(object sender, EventArgs e)
+        //Mouse Enter and Leave Events.
+        private void registerMouseEvent()
         {
-
+            this.homeBtn.MouseEnter += (object sender, EventArgs e) => onEnterColorChange(sender, e, this.homeBtn);
+            this.homeBtn.MouseLeave += (object sender, EventArgs e) => onLeaveColorChange(sender, e, this.homeBtn);
+            this.exitBtn.MouseEnter += (object sender, EventArgs e) => onEnterColorChange(sender, e, this.exitBtn);
+            this.exitBtn.MouseLeave += (object sender, EventArgs e) => onLeaveColorChange(sender, e, this.exitBtn);
         }
-    }
-}
+        //----------------------------------------------------------------------------------------------------------
+
+        private void onEnterColorChange(object sender, EventArgs e, PictureBox temp)
+        {
+            temp.BackColor = Color.Firebrick;
+        }
+        //----------------------------------------------------------------------------------------------------------
+
+        private void onLeaveColorChange(object sender, EventArgs e, PictureBox temp)
+        {
+            temp.BackColor = Color.WhiteSmoke;
+        }
+        //----------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------
+
+        //Form Exit Methods
+        private void HomeBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        //----------------------------------------------------------------------------------------------------------
+        private void ExitBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Dispose();
+            Application.Exit();
+        }
+        //----------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------
+    }//End Class.
+}//End Namespace.

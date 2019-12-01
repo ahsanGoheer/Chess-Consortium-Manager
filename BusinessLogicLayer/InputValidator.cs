@@ -8,6 +8,7 @@ namespace BusinessLogicLayer
 {
     public  class InputValidator
     {
+        //Checks if Player's name is correct or not.
         public static bool isValidName(string playerName)
         {
             bool isValid = true;
@@ -29,11 +30,14 @@ namespace BusinessLogicLayer
             }
             return isValid;
         }
+        //--------------------------------------------------------------------------------- 
+        //--------------------------------------------------------------------------------- 
 
+        //Checks if Player's Cnic is correct ot not.
         public static bool isValidCnic(string playerCnic)
         {
             bool isValid = true;
-            Regex cnicRegex = new Regex(@"^\d{5}\-?\d{7}\-?\d{1}");
+            Regex cnicRegex = new Regex(@"^\d{5}\-?\d{7}\-?\d{1}$");
             bool isMatch = cnicRegex.IsMatch(playerCnic);
             if (playerCnic == ""|| !isMatch)
             {
@@ -45,5 +49,8 @@ namespace BusinessLogicLayer
             }
             return isValid;
         }
-    }
-}
+        //--------------------------------------------------------------------------------- 
+        //--------------------------------------------------------------------------------- 
+
+    }//End Class.
+}//End Namespace.

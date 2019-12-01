@@ -10,31 +10,33 @@ namespace DataLayer
 {
     public class DatabaseHandler
     {
+        //Attributes.
         private SqlConnection DBConnection;
         private SqlDataAdapter DataAdapter;
         private DataSet ResultSet;
-
         private SqlCommand QueryCommand;
         private SqlDataReader QueryResultReader;
+        //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
 
-
-
-
+        //Constructor.
         public DatabaseHandler()
         {
             DBConnection = new SqlConnection(@"Data Source=DESKTOP-ED4GQK7;Initial Catalog=Chess Consortium;Integrated Security=True");
             DBConnection.Open();
             ResultSet = new DataSet();
         }
+        //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
 
-
-
+        //Methods.
         public void ConnectToDB(string s)
         {
             DBConnection = new SqlConnection(@"Data Source=DESKTOP-ED4GQK7;Initial Catalog=" + s + ";Integrated Security=True");
             DBConnection.Open();
             ResultSet = new DataSet();
         }
+        //---------------------------------------------------------------------------------------------- 
 
         public DataSet ExceuteQuerySet(string Query)
         {
@@ -43,7 +45,7 @@ namespace DataLayer
             DataAdapter.Dispose();
             return ResultSet;
         }
-
+        //---------------------------------------------------------------------------------------------- 
         public SqlDataReader ExceuteQuery(string Query)
         {
             QueryCommand = new SqlCommand(Query, DBConnection);
@@ -51,7 +53,7 @@ namespace DataLayer
             QueryCommand.Dispose();
             return QueryResultReader;
         }
-
+        //---------------------------------------------------------------------------------------------- 
         public int UpdateQuery(string Query)
         {
             QueryCommand = new SqlCommand(Query, DBConnection);
@@ -60,6 +62,7 @@ namespace DataLayer
             return Result;
 
         }
+        //----------------------------------------------------------------------------------------------
         public int InsertQuery(string Query)
         {
             QueryCommand = new SqlCommand(Query, DBConnection);
@@ -68,6 +71,7 @@ namespace DataLayer
             return Result;
 
         }
+        //---------------------------------------------------------------------------------------------- 
         public int UpdateQuerySet(DataSet ds, string Query)
         {
             DataAdapter = new SqlDataAdapter(Query, DBConnection);
@@ -77,7 +81,7 @@ namespace DataLayer
             DataAdapter.Dispose();
             return Result;
         }
-
+        //---------------------------------------------------------------------------------------------- 
         public object SpecificQuery(string Query)
         {
             QueryCommand = new SqlCommand(Query, DBConnection);
@@ -85,13 +89,13 @@ namespace DataLayer
             QueryCommand.Dispose();
             return Result;
         }
-
+        //---------------------------------------------------------------------------------------------- 
         public void CloseConnection()
         {
             DBConnection.Close();
         }
+        //---------------------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------------------- 
 
-
-
-    }
-}
+    }//End Class.
+}//End Namespace.

@@ -173,5 +173,41 @@
   <ItemGroup>
     <None Include="Resources\icons8-close-window-80.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-queen-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-knight-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-add-user-group-woman-man-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-restaurant-table-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick-chess-piece-standing-131616.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pexels-photo-277092.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-search-property-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-table-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-trophy-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-people-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-home-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-home-801.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

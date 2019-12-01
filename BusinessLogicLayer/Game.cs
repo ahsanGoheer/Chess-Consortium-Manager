@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLogicLayer
-{
-
+{ 
     public class Game
     {
         //Attributes.       
@@ -17,18 +16,21 @@ namespace BusinessLogicLayer
         byte outcome;
         static byte count = 0;
         //--------------------------------------------------------------------------------- 
+        //--------------------------------------------------------------------------------- 
+
 
         //Constructor. 
-
         public Game(string playerOneCnic, string playerTwoCnic, DateTime dateTimeOfGame)
         {
-            this.tableID = null;// will be assigned through set method.        
+            this.tableID = null;// Will be assigned through set method.        
             this.playerOneCnic = playerOneCnic;
             this.playerTwoCnic = playerTwoCnic;
             this.dateTimeOfGame = dateTimeOfGame;
-            this.outcome = 0;// Means game is in progress.              
+            this.outcome = 0;// Means that the game is in progress.              
         }
-        //----------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------- 
+
 
         //Properties. 
         public string TableID
@@ -36,12 +38,15 @@ namespace BusinessLogicLayer
             get { return this.tableID; }
             set { this.tableID = value; }
         }
+        //--------------------------------------------------------------------------------- 
+
         public string PlayerOneCnic
         {
             get { return this.playerOneCnic; }
             set
             { this.playerOneCnic = value; }
         }
+        //--------------------------------------------------------------------------------- 
 
         public string PlayerTwoCnic
         {
@@ -49,6 +54,7 @@ namespace BusinessLogicLayer
             set
             { this.playerTwoCnic = value; }
         }
+        //--------------------------------------------------------------------------------- 
 
         public DateTime DateTimeOfGame
         {
@@ -56,8 +62,11 @@ namespace BusinessLogicLayer
             set
             { dateTimeOfGame = value; }
         }
+        //--------------------------------------------------------------------------------- 
+
         public byte Outcome { get { return this.outcome; } set { this.outcome = value; } }
-        //----------------------------------------------------------------------------------- 
+        //---------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------- 
 
         //Methods.         
         public void setTableID()
@@ -69,6 +78,7 @@ namespace BusinessLogicLayer
             }
             this.tableID = $"T-{count}";
         }
+        //--------------------------------------------------------------------------------- 
 
         public string GetTableInfo()
         {
@@ -99,9 +109,8 @@ namespace BusinessLogicLayer
             return tableInfo;
         }
         //-------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------
 
+    }//End Class.
 
-
-    }
-
-}
+}//End Namespace.
