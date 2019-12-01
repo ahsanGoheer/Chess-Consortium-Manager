@@ -44,6 +44,7 @@
             this.searchByGB = new System.Windows.Forms.GroupBox();
             this.byNameRB = new System.Windows.Forms.RadioButton();
             this.byIDRB = new System.Windows.Forms.RadioButton();
+            this.searchLbl = new System.Windows.Forms.Label();
             this.searchGb.SuspendLayout();
             this.resultGb.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -98,9 +99,9 @@
             this.playerIDLbl.Location = new System.Drawing.Point(32, 41);
             this.playerIDLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.playerIDLbl.Name = "playerIDLbl";
-            this.playerIDLbl.Size = new System.Drawing.Size(112, 19);
+            this.playerIDLbl.Size = new System.Drawing.Size(73, 19);
             this.playerIDLbl.TabIndex = 1;
-            this.playerIDLbl.Text = "Enter Player ID:";
+            this.playerIDLbl.Text = "Player ID:";
             // 
             // resultGb
             // 
@@ -196,13 +197,13 @@
             this.byNameRB.Name = "byNameRB";
             this.byNameRB.Size = new System.Drawing.Size(88, 23);
             this.byNameRB.TabIndex = 0;
-            this.byNameRB.TabStop = true;
             this.byNameRB.Text = "By Name";
             this.byNameRB.UseVisualStyleBackColor = true;
             // 
             // byIDRB
             // 
             this.byIDRB.AutoSize = true;
+            this.byIDRB.Checked = true;
             this.byIDRB.Location = new System.Drawing.Point(196, 37);
             this.byIDRB.Name = "byIDRB";
             this.byIDRB.Size = new System.Drawing.Size(63, 23);
@@ -211,12 +212,24 @@
             this.byIDRB.Text = "By ID";
             this.byIDRB.UseVisualStyleBackColor = true;
             // 
+            // searchLbl
+            // 
+            this.searchLbl.AutoSize = true;
+            this.searchLbl.Font = new System.Drawing.Font("Corbel", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLbl.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.searchLbl.Location = new System.Drawing.Point(351, 16);
+            this.searchLbl.Name = "searchLbl";
+            this.searchLbl.Size = new System.Drawing.Size(91, 33);
+            this.searchLbl.TabIndex = 14;
+            this.searchLbl.Text = "Search";
+            // 
             // SearchAPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InfoText;
             this.ClientSize = new System.Drawing.Size(792, 382);
+            this.Controls.Add(this.searchLbl);
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.homeBtn);
             this.Controls.Add(this.deleteBtn);
@@ -237,6 +250,7 @@
             this.searchByGB.ResumeLayout(false);
             this.searchByGB.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -256,5 +270,6 @@
         private System.Windows.Forms.GroupBox searchByGB;
         private System.Windows.Forms.RadioButton byIDRB;
         private System.Windows.Forms.RadioButton byNameRB;
+        private System.Windows.Forms.Label searchLbl;
     }
 }

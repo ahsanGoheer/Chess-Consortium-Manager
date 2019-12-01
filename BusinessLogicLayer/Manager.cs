@@ -260,6 +260,63 @@ namespace BusinessLogicLayer
             return IDs;
         }
         //---------------------------------------------------------------------------------------------- 
+        public string getAllGames()
+        {
+            
+            DatabaseHandler gamesRecordHandler = new DatabaseHandler();
+            string query = "Select * from Game";
+            DataSet gameData = gamesRecordHandler.ExceuteQuerySet(query);
+            gamesRecordHandler.CloseConnection();
+            string info = null;
+            if (gameData.Tables[0].Rows.Count != 0)
+            {
+                info = "";
+                foreach (DataRow temp in gameData.Tables[0].Rows)
+                {
+                    Game fetchedPlayer = new Game();//PLAYER NAME AND CNIC
+                    fetchedPlayer.TableID = temp[0].ToString();
+                    fetchedPlayer.DateTimeOfGame = (DateTime)temp[1];
+                    fetchedPlayer.Outcome = byte.Parse(temp[2].ToString());
+                    fetchedPlayer.PlayerOneCnic = temp[3].ToString();
+                    fetchedPlayer.PlayerTwoCnic = temp[4].ToString();
+                    info += fetchedPlayer.GetTableInfo();
+                    info += "**************************************\n";
+
+                }
+            }
+
+            return info;
+           
+        }
+        public string getGame(DateTime gameDate)
+        {
+
+            DatabaseHandler gamesRecordHandler = new DatabaseHandler();
+            string query = $"Select * from Game where DateTimeOfGame >'{gameDate}' and DateTimeOfGame<'{gameDate.AddDays(1)}'";
+            DataSet gameData = gamesRecordHandler.ExceuteQuerySet(query);
+            gamesRecordHandler.CloseConnection();
+            string info = null;
+            if (gameData.Tables[0].Rows.Count != 0)
+            {
+                info = "";
+                foreach (DataRow temp in gameData.Tables[0].Rows)
+                {
+                    Game fetchedPlayer = new Game();//PLAYER NAME AND CNIC
+                    fetchedPlayer.TableID = temp[0].ToString();
+                    fetchedPlayer.DateTimeOfGame = (DateTime)temp[1];
+                    fetchedPlayer.Outcome = byte.Parse(temp[2].ToString());
+                    fetchedPlayer.PlayerOneCnic = temp[3].ToString();
+                    fetchedPlayer.PlayerTwoCnic = temp[4].ToString();
+                    info += fetchedPlayer.GetTableInfo();
+                    info += "**************************************\n";
+
+                }
+            }
+
+            return info;
+
+        }
+        //---------------------------------------------------------------------------------------------- 
         //---------------------------------------------------------------------------------------------- 
         //---------------------------------------------------------------------------------------------- 
 

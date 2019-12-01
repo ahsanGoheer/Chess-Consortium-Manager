@@ -98,6 +98,7 @@ namespace Chess_Consortium_Manager
                 temp.MouseEnter += (object sender, EventArgs e) => colorChangeOnEnter(sender, e, temp);
                 temp.MouseLeave += (object sender, EventArgs e) => colorChangeOnLeave(sender, e, temp);
             }
+         
         }
 
         private void colorChangeOnEnter(object sender,EventArgs e,Button selectedBtn)
@@ -107,6 +108,37 @@ namespace Chess_Consortium_Manager
         private void colorChangeOnLeave(object sender, EventArgs e, Button selectedBtn)
         {
             selectedBtn.ForeColor = Color.DarkSlateGray;
+        }
+
+        private void Nextbtn_MouseEnter(object sender, EventArgs e)
+        {
+            Nextbtn.BackColor = Color.Firebrick;
+        }
+
+        private void Nextbtn_MouseLeave(object sender, EventArgs e)
+        {
+            Nextbtn.BackColor = Color.WhiteSmoke;
+
+        }
+
+        private void Nextbtn_Click(object sender, EventArgs e)
+        {
+            SideForm newForm = new SideForm();
+            newForm.Show();
+            this.Hide();
+            newForm.FormClosing += new System.Windows.Forms.FormClosingEventHandler(showMe);
+
+
+        }
+
+        private void OperationsPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void LogoBox_Click(object sender, EventArgs e)
+        {
+
         }
     }//End Class.
 }//End Namespace.

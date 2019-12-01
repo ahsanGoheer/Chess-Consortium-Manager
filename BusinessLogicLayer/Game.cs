@@ -20,6 +20,7 @@ namespace BusinessLogicLayer
 
 
         //Constructor. 
+        public Game() { }
         public Game(string playerOneCnic, string playerTwoCnic, DateTime dateTimeOfGame)
         {
             this.tableID = null;// Will be assigned through set method.        

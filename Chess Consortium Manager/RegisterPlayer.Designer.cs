@@ -34,19 +34,20 @@
             this.registerBtn = new System.Windows.Forms.Button();
             this.playerCnicTb = new System.Windows.Forms.TextBox();
             this.playerNameTb = new System.Windows.Forms.TextBox();
+            this.playerLogoPb = new System.Windows.Forms.PictureBox();
             this.playerCnicLbl = new System.Windows.Forms.Label();
             this.playerNameLbl = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.homeBtn = new System.Windows.Forms.PictureBox();
             this.exitBtn = new System.Windows.Forms.PictureBox();
-            this.playerLogoPb = new System.Windows.Forms.PictureBox();
+            this.registerNewPlayerLbl = new System.Windows.Forms.Label();
             this.enterPlayerDetailsGb.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.playerLogoPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.homeBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitBtn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.playerLogoPb)).BeginInit();
             this.SuspendLayout();
             // 
             // enterPlayerDetailsGb
@@ -98,6 +99,17 @@
             this.playerNameTb.Size = new System.Drawing.Size(266, 33);
             this.playerNameTb.TabIndex = 3;
             // 
+            // playerLogoPb
+            // 
+            this.playerLogoPb.BackColor = System.Drawing.Color.FloralWhite;
+            this.playerLogoPb.BackgroundImage = global::Chess_Consortium_Manager.Properties.Resources.iconfinder_user_add_216490;
+            this.playerLogoPb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.playerLogoPb.Location = new System.Drawing.Point(22, 46);
+            this.playerLogoPb.Name = "playerLogoPb";
+            this.playerLogoPb.Size = new System.Drawing.Size(153, 252);
+            this.playerLogoPb.TabIndex = 2;
+            this.playerLogoPb.TabStop = false;
+            // 
             // playerCnicLbl
             // 
             this.playerCnicLbl.AutoSize = true;
@@ -131,7 +143,7 @@
             // 
             this.homeBtn.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.homeBtn.Image = global::Chess_Consortium_Manager.Properties.Resources.icons8_home_801;
-            this.homeBtn.Location = new System.Drawing.Point(12, 12);
+            this.homeBtn.Location = new System.Drawing.Point(12, 11);
             this.homeBtn.Name = "homeBtn";
             this.homeBtn.Size = new System.Drawing.Size(46, 37);
             this.homeBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -151,16 +163,16 @@
             this.exitBtn.TabStop = false;
             this.exitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
-            // playerLogoPb
+            // registerNewPlayerLbl
             // 
-            this.playerLogoPb.BackColor = System.Drawing.Color.FloralWhite;
-            this.playerLogoPb.BackgroundImage = global::Chess_Consortium_Manager.Properties.Resources.iconfinder_user_add_216490;
-            this.playerLogoPb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.playerLogoPb.Location = new System.Drawing.Point(22, 46);
-            this.playerLogoPb.Name = "playerLogoPb";
-            this.playerLogoPb.Size = new System.Drawing.Size(153, 252);
-            this.playerLogoPb.TabIndex = 2;
-            this.playerLogoPb.TabStop = false;
+            this.registerNewPlayerLbl.AutoSize = true;
+            this.registerNewPlayerLbl.Font = new System.Drawing.Font("Corbel", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.registerNewPlayerLbl.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.registerNewPlayerLbl.Location = new System.Drawing.Point(329, 16);
+            this.registerNewPlayerLbl.Name = "registerNewPlayerLbl";
+            this.registerNewPlayerLbl.Size = new System.Drawing.Size(235, 33);
+            this.registerNewPlayerLbl.TabIndex = 14;
+            this.registerNewPlayerLbl.Text = "Register New Player";
             // 
             // RegisterPlayer
             // 
@@ -168,6 +180,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InfoText;
             this.ClientSize = new System.Drawing.Size(859, 477);
+            this.Controls.Add(this.registerNewPlayerLbl);
             this.Controls.Add(this.homeBtn);
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.enterPlayerDetailsGb);
@@ -176,15 +189,15 @@
             this.Name = "RegisterPlayer";
             this.Text = "Register a Player";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterPlayer_FormClosing);
-            
             this.enterPlayerDetailsGb.ResumeLayout(false);
             this.enterPlayerDetailsGb.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.playerLogoPb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.homeBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitBtn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.playerLogoPb)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -201,5 +214,6 @@
         private System.Windows.Forms.ErrorProvider errorProvider2;
         private System.Windows.Forms.PictureBox exitBtn;
         private System.Windows.Forms.PictureBox homeBtn;
+        private System.Windows.Forms.Label registerNewPlayerLbl;
     }
 }

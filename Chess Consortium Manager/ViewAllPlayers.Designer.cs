@@ -29,10 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewAllPlayers));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.playerDataGB = new System.Windows.Forms.GroupBox();
             this.playersRtb = new System.Windows.Forms.RichTextBox();
-            this.homeBtn = new System.Windows.Forms.PictureBox();
-            this.exitBtn = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,24 +38,26 @@
             this.registeredPlayersListBox = new System.Windows.Forms.ListBox();
             this.showAllPlayersBtn = new System.Windows.Forms.Button();
             this.topTenListBtn = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.homeBtn)).BeginInit();
+            this.exitBtn = new System.Windows.Forms.PictureBox();
+            this.homeBtn = new System.Windows.Forms.PictureBox();
+            this.playerDataGB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitBtn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.homeBtn)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // playerDataGB
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox1.Controls.Add(this.playersRtb);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(358, 69);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(503, 419);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Player Data";
+            this.playerDataGB.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.playerDataGB.Controls.Add(this.playersRtb);
+            this.playerDataGB.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playerDataGB.Location = new System.Drawing.Point(358, 69);
+            this.playerDataGB.Margin = new System.Windows.Forms.Padding(2);
+            this.playerDataGB.Name = "playerDataGB";
+            this.playerDataGB.Padding = new System.Windows.Forms.Padding(2);
+            this.playerDataGB.Size = new System.Drawing.Size(503, 419);
+            this.playerDataGB.TabIndex = 0;
+            this.playerDataGB.TabStop = false;
+            this.playerDataGB.Text = "Player Data";
             // 
             // playersRtb
             // 
@@ -70,30 +70,6 @@
             this.playersRtb.Size = new System.Drawing.Size(499, 396);
             this.playersRtb.TabIndex = 0;
             this.playersRtb.Text = "";
-            // 
-            // homeBtn
-            // 
-            this.homeBtn.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.homeBtn.Image = global::Chess_Consortium_Manager.Properties.Resources.icons8_home_801;
-            this.homeBtn.Location = new System.Drawing.Point(12, 12);
-            this.homeBtn.Name = "homeBtn";
-            this.homeBtn.Size = new System.Drawing.Size(46, 37);
-            this.homeBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.homeBtn.TabIndex = 12;
-            this.homeBtn.TabStop = false;
-            this.homeBtn.Click += new System.EventHandler(this.HomeBtn_Click);
-            // 
-            // exitBtn
-            // 
-            this.exitBtn.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.exitBtn.Image = global::Chess_Consortium_Manager.Properties.Resources.icons8_close_window_80;
-            this.exitBtn.Location = new System.Drawing.Point(852, 12);
-            this.exitBtn.Name = "exitBtn";
-            this.exitBtn.Size = new System.Drawing.Size(39, 39);
-            this.exitBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.exitBtn.TabIndex = 13;
-            this.exitBtn.TabStop = false;
-            this.exitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
             // label1
             // 
@@ -172,6 +148,30 @@
             this.topTenListBtn.UseVisualStyleBackColor = true;
             this.topTenListBtn.Click += new System.EventHandler(this.TopTenListBtn_Click);
             // 
+            // exitBtn
+            // 
+            this.exitBtn.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.exitBtn.Image = global::Chess_Consortium_Manager.Properties.Resources.icons8_close_window_80;
+            this.exitBtn.Location = new System.Drawing.Point(852, 12);
+            this.exitBtn.Name = "exitBtn";
+            this.exitBtn.Size = new System.Drawing.Size(39, 39);
+            this.exitBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.exitBtn.TabIndex = 13;
+            this.exitBtn.TabStop = false;
+            this.exitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
+            // 
+            // homeBtn
+            // 
+            this.homeBtn.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.homeBtn.Image = global::Chess_Consortium_Manager.Properties.Resources.icons8_home_801;
+            this.homeBtn.Location = new System.Drawing.Point(12, 12);
+            this.homeBtn.Name = "homeBtn";
+            this.homeBtn.Size = new System.Drawing.Size(46, 37);
+            this.homeBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.homeBtn.TabIndex = 12;
+            this.homeBtn.TabStop = false;
+            this.homeBtn.Click += new System.EventHandler(this.HomeBtn_Click);
+            // 
             // ViewAllPlayers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -187,16 +187,16 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.homeBtn);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.playerDataGB);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ViewAllPlayers";
             this.Text = "View all Players";
             this.Load += new System.EventHandler(this.ViewAllPlayers_Load);
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.homeBtn)).EndInit();
+            this.playerDataGB.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.exitBtn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.homeBtn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,7 +204,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox playerDataGB;
         private System.Windows.Forms.RichTextBox playersRtb;
         private System.Windows.Forms.PictureBox homeBtn;
         private System.Windows.Forms.PictureBox exitBtn;

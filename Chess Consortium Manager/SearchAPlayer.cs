@@ -43,7 +43,10 @@ namespace Chess_Consortium_Manager
         private void SearchBtn_Click(object sender, EventArgs e)
         {
             Manager consortiumManager = Manager.Instance;
-            string playerCred = playerIDTb.Text.Trim();
+            string playerCred = null;
+            if (playerIDTb.Text != "")
+            { playerCred = playerIDTb.Text.Trim(); }
+          
             if(byIDRB.Checked)
             {
                 cnic = playerCred;

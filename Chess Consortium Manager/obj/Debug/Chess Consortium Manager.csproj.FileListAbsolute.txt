@@ -35,3 +35,5 @@ C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\bi
 C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\bin\Debug\DataLayer.pdb
 C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\bin\Debug\BusinessLogicLayer.dll.config
 C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\bin\Debug\DataLayer.dll.config
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.SideForm.resources
+C:\Users\ahsan\source\repos\Chess Consortium Manager\Chess Consortium Manager\obj\Debug\Chess_Consortium_Manager.GameDetailsForm.resources

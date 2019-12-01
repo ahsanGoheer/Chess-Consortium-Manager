@@ -58,11 +58,22 @@
     <Compile Include="AssignTable.Designer.cs">
       <DependentUpon>AssignTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Chess_ConsortiumDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Chess_ConsortiumDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameDetailsForm.Designer.cs">
+      <DependentUpon>GameDetailsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +95,12 @@
     <Compile Include="ShowAllTables.Designer.cs">
       <DependentUpon>ShowAllTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="SideForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SideForm.Designer.cs">
+      <DependentUpon>SideForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewAllPlayers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameDetailsForm.resx">
+      <DependentUpon>GameDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -118,9 +138,23 @@
     <EmbeddedResource Include="ShowAllTables.resx">
       <DependentUpon>ShowAllTables.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SideForm.resx">
+      <DependentUpon>SideForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewAllPlayers.resx">
       <DependentUpon>ViewAllPlayers.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Chess_ConsortiumDataSet.xsc">
+      <DependentUpon>Chess_ConsortiumDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Chess_ConsortiumDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Chess_ConsortiumDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Chess_ConsortiumDataSet.xss">
+      <DependentUpon>Chess_ConsortiumDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -208,6 +242,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-home-801.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\right-arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chess-board.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\left-arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
